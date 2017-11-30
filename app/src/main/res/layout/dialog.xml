@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ftSuccessTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="24.0dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialogText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16.0dip"
+        android:text=""
+        android:textSize="18.0dip"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/dialogBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5.0dip"
+        android:background="@drawable/general_dialog_button_ripple_effect"
+        android:text="OK"
+        android:textColor="@color/colorWhite"
+        android:textSize="18.0dip" />
+</LinearLayout>

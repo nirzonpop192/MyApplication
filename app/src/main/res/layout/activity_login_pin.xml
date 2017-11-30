@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_login_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/color_login_bg"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+
+        <LinearLayout
+            android:id="@+id/login_pin_body_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="-20.0dip"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="2.0"
+                android:orientation="vertical">
+
+             <!--   <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/logo_connect" />-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_marginBottom="20.0dip"
+                android:layout_weight="6.0"
+                android:orientation="vertical"
+                android:weightSum="1.0">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="20.0dip"
+                    android:layout_marginRight="20.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:background="@drawable/login_border_box_opacity"
+                    android:orientation="vertical"
+                    android:padding="20.0dip">
+
+                    <ImageView
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:id="@+id/imageView1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/login_banner" />
+
+                    <TextView
+                        android:id="@+id/loinPinTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingBottom="10.0dip"
+                        android:paddingTop="1.0dip"
+                        android:text="@string/loinPinTitle"
+                        android:textColor="@color/colorRed"
+                        android:textSize="18.0dip"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/pin_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/login_pin_first_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+
+                        <EditText
+                            android:id="@+id/login_pin_second_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+
+                        <EditText
+                            android:id="@+id/login_pin_third_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+
+                        <EditText
+                            android:id="@+id/login_pin_forth_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+
+                        <EditText
+                            android:id="@+id/login_pin_fifth_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+
+                        <EditText
+                            android:id="@+id/login_pin_sixth_edittext"
+                            style="@style/pin_edittext_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:background="@drawable/general_border_box"
+                            android:contentDescription="@string/pin_content_desc"
+                            android:padding="10.0dip" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/login_pin_hidden_edittext"
+                        android:layout_width="1.0dip"
+                        android:layout_height="1.0dip"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@null"
+                        android:contentDescription="@string/pin_content_desc"
+                        android:cursorVisible="false"
+                        android:gravity="center_horizontal"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:textColor="#00000000" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="30.0dip">
+
+                        <ImageView
+                            android:id="@+id/loginLogoNorton"
+                            android:layout_width="0.0dip"
+                            android:layout_height="40.0dip"
+                            android:layout_gravity="left"
+                            android:layout_weight="1.0"
+                            app:srcCompat="@drawable/logo_norton" />
+
+                        <Button
+                            android:id="@+id/btnPinRegContinue"
+                            android:layout_width="0.0dip"
+                            android:layout_height="40.0dip"
+                            android:layout_marginLeft="40.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/general_button_ripple_effect"
+                            android:onClick="pinLoginContinue"
+                            android:text="@string/btnContinue"
+                            android:textColor="@color/generalButtonTextColor"
+                            android:textSize="22.0sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/forgotPin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5.0dip"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="forgotPin"
+                            android:text="@string/forgot_pin"
+                            android:textColor="@color/colorRed"
+                            android:textSize="18.0dip"
+                            android:textStyle="bold|italic" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingBottom="5.0dip"
+                    android:text="@string/app_copyright"
+                    android:textColor="@color/colorTextBlackBlur"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/login_pin_navigation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorWhite"
+        app:itemTextColor="@color/colorWhite"
+        app:menu="@menu/login_bottom_navigation" />
+</LinearLayout>

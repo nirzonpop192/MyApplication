@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_motive"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15.0dip"
+        android:background="@drawable/general_background_white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:id="@+id/termsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="40.0dip"
+                    android:layout_marginRight="40.0dip"
+                    android:layout_marginTop="20.0dip"
+                    android:text=""
+                    android:textSize="24.0dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/termsItem"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="30.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:linksClickable="false" />
+
+                <TextView
+                    android:id="@+id/detailsWebLink"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="30.0dip"
+                    android:layout_marginTop="2.0dip"
+                    android:clickable="true"
+                    android:onClick="transferUrl"
+                    android:text="More Details ..."
+                    android:textColor="@color/colorTextPrimary"
+                    android:textStyle="bold|italic" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20.0dip"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="30.0dip"
+                    android:layout_marginTop="20.0dip"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnTermsCancel"
+                        style="@style/button_style"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/cancel_button_ripple_effect"
+                        android:onClick="termsCancel"
+                        android:text="@string/btnTermsDisagree"
+                        android:textColor="@color/generalButtonTextColor"
+                        android:textSize="20.0sp" />
+
+                    <Button
+                        android:id="@+id/btnTermsContinue"
+                        style="@style/button_style"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/general_button_ripple_effect"
+                        android:onClick="termsContinue"
+                        android:text="@string/btnTermsAgree"
+                        android:textColor="@color/generalButtonTextColor"
+                        android:textSize="20.0sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorTextPrimary">#000</color>
+    <color name="buttonColor">#ff027d39</color>
+    <color name="buttonRippleColor">#ff0fe66f</color>
+    <color name="colorWhite">#fff</color>
+    <color name="cancelButtonColor">#ff950a0a</color>
+    <color name="cancelButtonRippleColor">#ffff636b</color>
+    <color name="generalButtonTextColor">#ffffffff</color>
+    <color name="colorTextBlackBlur">#a63b3c3d</color>
+    <color name="colorTextHint">#99027d39</color>
+    <color name="color_login_bg">#C2E3B3</color>
+    <color name="colorRed">#e7d70303</color>
+ <!--   List Color-->
+    <color name="list_row_hover_end_color">#ffebeef0</color>
+    <color name="list_row_hover_start_color">#ffebeef0</color>
+    <color name="list_row_start_color">#ffffffff</color>
+    <color name="list_row_end_color">#ffffffff</color>
+
+    <color name="colorRipple">#ffa9a9f5</color>
+    <color name="colorRippleDb1">#fff9896c</color>
+    <color name="colorRippleDb2">#ff3fa9bc</color>
+    <color name="colorRippleDb3">#ffe3c935</color>
+    <color name="colorRippleDb4">#ff00efef</color>
+    <color name="colorRippleDb5">#fffc8ed6</color>
+    <color name="colorRippleDb6">#fff47b79</color>
+    <color name="colorTextBlack">#ff3b3c3d</color>
+
+</resources>
