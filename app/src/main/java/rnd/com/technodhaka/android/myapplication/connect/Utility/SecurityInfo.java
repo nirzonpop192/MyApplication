@@ -1,8 +1,11 @@
 package rnd.com.technodhaka.android.myapplication.connect.Utility;
 
 public class SecurityInfo {
-    public static String BASE_URL = "https://connect.shimantobank.com:57443/";
+
+    public static String IB_URL = "http://192.168.214.2/internet_bank/ib_api/";
+    public static String CBI_URL = "http://192.168.214.2/internet_bank/cbi_api/";
     public static String TERMS_N_CONDITION_URL = "https://connect.shimantobank.com/Login/TermsConditions.aspx";
+    public static  final String MORE_INFO_ACTIVITY="http://www.shimantobank.com/androidmore";
     public static String browserInfo;
     public static String instanceId;
     public static String isFirstLogin;
@@ -14,9 +17,29 @@ public class SecurityInfo {
     public static String userName;
     public static String userPassword;
 
-    public static String getFinalVerifyInstanceId(String instanceId){
-        return  SecurityInfo.BASE_URL + "Api/Security/VerifyInstanceId?"+"instanceId=" + instanceId + "&emi=" + "na" + "&sn=" + "na" + "&ip=" + "na" + "&email=" + "na";
+    public static String getFinalVerifyInstanceId(final String instanceId) {
+        return SecurityInfo.IB_URL + "Api/Security/VerifyInstanceId?" + "instanceId="
+                + instanceId + "&emi=" + "na" + "&sn=" + "na" + "&ip=" + "na" + "&email=" + "na";
     }
+
+    public static String getFinalLogoutUrl(final String userEmail, final String userPassword,
+                                           final String terminalIp, final String sessionId) {
+
+        return SecurityInfo.IB_URL + "api/Security/Logout?" + "email=" + userEmail
+                + "&password=" + userPassword + "&terminalIp=" + terminalIp
+                + "&sessionId=" + sessionId;
+    }
+    public static String getFinalTopupMinMaxAmountUrl(final String userEmail){
+        return SecurityInfo.IB_URL + "api/Account/MinimunRechargeAmount?" + "emailid=" + userEmail;
+    }
+    public static String getFinalMinMaxAmountUrl(final String userEmail, String beftnLimitTypeID,
+                                                 String terminalIp, String sessionId, String browserInfo){
+
+        return SecurityInfo.IB_URL + "api/Account/MinimunTransferAmount?" + "email=" + userEmail
+                + "&limittypeid=" + beftnLimitTypeID + "&terminalIp=" +terminalIp
+                + "&sessionId=" + sessionId + "&browserInfo=" + browserInfo;
+    }
+
 
     public static String getTerminalIp() {
         return terminalIp;

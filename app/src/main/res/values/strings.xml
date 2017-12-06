@@ -159,6 +159,8 @@
     <string name="trans_fund">Fund Transfer</string>
     <string name="ttile_tab_end_date">End Date</string>
     <string name="unclearedFund">Uncleared Fund</string>
+    <string name="name">Name</string>
+    <string name="acc_name">Acc Name:</string>
 
 
 </resources>

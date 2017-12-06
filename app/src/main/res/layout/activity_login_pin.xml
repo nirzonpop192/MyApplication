@@ -166,13 +166,13 @@
                         android:orientation="horizontal"
                         android:paddingTop="30.0dip">
 
-                        <ImageView
+                   <!--     <ImageView
                             android:id="@+id/loginLogoNorton"
                             android:layout_width="0.0dip"
                             android:layout_height="40.0dip"
                             android:layout_gravity="left"
                             android:layout_weight="1.0"
-                            app:srcCompat="@drawable/logo_norton" />
+                            app:srcCompat="@drawable/logo_norton" />-->
 
                         <Button
                             android:id="@+id/btnPinRegContinue"

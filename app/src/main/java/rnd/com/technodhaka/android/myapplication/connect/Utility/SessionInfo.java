@@ -1,6 +1,16 @@
 package rnd.com.technodhaka.android.myapplication.connect.Utility;
 
 public class SessionInfo {
+    public  static  String customerID;
+
+    public static String getCustomerID() {
+        return customerID;
+    }
+
+    public static void setCustomerID(String customerID) {
+        SessionInfo.customerID = customerID;
+    }
+
     public static String IsFirstLogin;
     public static String IsFound;
     public static String IsInstanceVerified;

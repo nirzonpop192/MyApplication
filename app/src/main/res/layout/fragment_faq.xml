@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="16.0dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/faqHeader"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:text="Header"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="45.0dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/faqBody"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:text="Body" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/acc_single_list"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
+        android:background="@drawable/acc_list_ripple_effect"
+        android:orientation="vertical"
+        android:padding="10.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.0"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="Acc No:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/info_acc_no_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="2.0"
+                    android:text="\ 0012455878"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/info_acc_module_text"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="@string/acc_name"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/info_acc_name_txt"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="@string/name" />
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="Type:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_info_acc_type"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="Savings Deposit" />
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1.0"
+                    android:text="Balance:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/info_acc_blnc_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.0"
+                    android:gravity="left"
+                    android:text="\ 0012455878" />
+
+                <TextView
+                    android:id="@+id/info_acc_curr_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="BDT" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

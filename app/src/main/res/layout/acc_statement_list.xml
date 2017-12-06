@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5.0dip"
+        android:background="@drawable/acc_list_ripple_effect"
+        android:orientation="vertical"
+        android:padding="10.0dip">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.0"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="Transaction Date"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acc_state_transaction_date_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="2.0"
+                    android:text="\ 0012455878"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:text="Particular"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acc_state_particular_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="Savings Deposit" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1.0"
+                    android:text="Deposit:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acc_state_dp_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.0"
+                    android:gravity="left"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1.0"
+                    android:text="Withdrawal:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acc_state_withdrawl_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.0"
+                    android:gravity="left"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1.0"
+                    android:text="Balance:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/acc_state_blnc_text"
+                    style="@style/accountListListView"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.0"
+                    android:gravity="left"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

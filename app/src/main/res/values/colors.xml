@@ -22,6 +22,10 @@
 
     <color name="colorRipple">#ffa9a9f5</color>
     <color name="colorRippleDb1">#fff9896c</color>
+    <color name="colorFundTrnsSold">#0281d7</color>
+    <color name="colorFundTrnsRipple">#024e82</color>
+    <color name="colorAccSumSold">#fe8802</color>
+    <color name="colorAccSumRipple">#ad5d03</color>
     <color name="colorRippleDb2">#ff3fa9bc</color>
     <color name="colorRippleDb3">#ffe3c935</color>
     <color name="colorRippleDb4">#ff00efef</color>
@@ -29,4 +33,5 @@
     <color name="colorRippleDb6">#fff47b79</color>
     <color name="colorTextBlack">#ff3b3c3d</color>
 
+    <color name="colorAccListRipple">#ffd9d9d9</color>
 </resources>

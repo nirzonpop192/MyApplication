@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.Activities;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -31,7 +31,6 @@ import java.util.TimerTask;
 import rnd.com.technodhaka.android.myapplication.connect.Connectivity.NetworkAvailability;
 import rnd.com.technodhaka.android.myapplication.connect.Dialogs.ShowDialogs;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
-import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -83,11 +82,12 @@ public class SplashActivity extends AppCompatActivity {
             }
             if (SplashActivity.this.progressStatus == 100) {
                 try {
+/*                    --- no registration process needed right now -----*//*
                     if (SessionInfo.IsInstanceVerified.equals("N")) {
                            SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginRegisterActivity.class));
                         return;
-                    }
-                      SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginPinActivity.class));
+                    }*/
+                      SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } catch (Exception e2) {
                     Log.d("error", e2 + "");
                 }
@@ -176,24 +176,27 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void instanceIdVerify() {
         String TAG = "SplashScreen";
-        String instanceIdUrl = SecurityInfo.BASE_URL + "Api/Security/VerifyInstanceId?";
-        String hUrl = SecurityInfo.BASE_URL + "Api/Security/HelloService?";
+//        String instanceIdUrl = SecurityInfo.IB_URL + "Api/Security/VerifyInstanceId?";
+        String instanceIdUrl = SecurityInfo.IB_URL + "index.php?check";
+  //      String hUrl = SecurityInfo.IB_URL + "Api/Security/HelloService?";
 
         final String verifyInstanceId = InstanceID.getInstance(this).getId();
 
-        String finalVerifyInstanceId = instanceIdUrl + "instanceId=" + verifyInstanceId + "&emi="
-                + this.emi + "&sn=" + this.sn + "&ip=" + this.ip + "&email=" + this.email;
+       /* String finalVerifyInstanceId = instanceIdUrl + "instanceId=" + verifyInstanceId + "&emi="
+                + this.emi + "&sn=" + this.sn + "&ip=" + this.ip + "&email=" + this.email;*/
+
+        String finalVerifyInstanceId = instanceIdUrl ;
         Log.d("finalVerifyInstanceId", finalVerifyInstanceId);
         try {
             RequestQueue mRequestQueue = Volley.newRequestQueue(this);
             StringRequest strReq = new StringRequest(0, finalVerifyInstanceId, new Listener<String>() {
                 public void onResponse(String response) {
                     response = response.replaceAll("\\\\", "");
-                    response = response.substring(1, response.length() - 1);
+            /*        response = response.substring(1, response.length() - 1);*/
                     try {
                         Log.d("Instance_verify", response);
                         JSONObject user = new JSONObject(response);
-                        SplashActivity.this.userCode = user.getString("UserCode").toString();
+/*                        SplashActivity.this.userCode = user.getString("UserCode").toString();
                         SessionInfo.IsInstanceVerified = user.getString("IsInstanceVerified");
                         SecurityInfo.setUserCode(user.getString("UserCode"));
                         SecurityInfo.setIsFirstLogin(user.getString("IsFirstLogin"));
@@ -201,7 +204,7 @@ public class SplashActivity extends AppCompatActivity {
                         SecurityInfo.setUserPassword(user.getString("Password"));
                         SecurityInfo.setTerminalIp(verifyInstanceId);
                         SecurityInfo.setBrowserInfo("na");
-                        SecurityInfo.setRemarks("na");
+                        SecurityInfo.setRemarks("na");*/
 //                        Log.d("userCode1N", SecurityInfo.getUserCode());
 //                        Log.d("IsUserVerified", SessionInfo.IsInstanceVerified);
                     } catch (JSONException e) {

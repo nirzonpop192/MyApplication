@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments.Models;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models;
 
 public class BankContactInfo {
     public String address;

@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
@@ -34,8 +34,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import rnd.com.technodhaka.android.myapplication.R;
-import rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments.Models.BankContactInfo;
-import rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments.Models.ContactListAdapter;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models.BankContactInfo;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models.ContactListAdapter;
 
 public class ContactListFragment extends Fragment {
     private static final int REQUEST_PHONE_CALL = 1;

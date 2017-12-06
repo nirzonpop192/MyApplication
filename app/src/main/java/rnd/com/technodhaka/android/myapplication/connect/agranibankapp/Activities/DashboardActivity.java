@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.Activities;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
     LinearLayout dashItem6;
     boolean doubleBackToExitPressedOnce = false;
     LinearLayout fundTransfarDashboardLayout;
-    private OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new C06061();
+    private OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationItemSelectedListener();
     ProgressDialog progress;
     Toolbar toolbar;
     LinearLayout topUpDashboardLayout;
@@ -57,8 +58,8 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    class C06061 implements OnNavigationItemSelectedListener {
-        C06061() {
+    class NavigationItemSelectedListener implements OnNavigationItemSelectedListener {
+        NavigationItemSelectedListener() {
         }
 
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -97,26 +98,28 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    class C06083 implements ErrorListener {
-        C06083() {
+    class LogoutResponseErrorListener implements ErrorListener {
+        LogoutResponseErrorListener() {
         }
 
         public void onErrorResponse(VolleyError error) {
             DashboardActivity.this.progress.dismiss();
             VolleyErrorHelper.getMessage(error, DashboardActivity.this);
             Log.d("Logout", "onErrorResponse: " + error);
-            Toast.makeText(DashboardActivity.this, "Logout unsuccessful! Please try again!", 1).show();
+            Toast.makeText(DashboardActivity.this, "Logout unsuccessful! Please try again!", Toast.LENGTH_SHORT).show();
         }
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView((int) R.layout.activity_dashboard);
+        setContentView( R.layout.activity_dashboard);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         this.coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         this.toolbar = (Toolbar) findViewById(R.id.toolbar_menu);
+
         setSupportActionBar(this.toolbar);
-        getSupportActionBar().setTitle((int) R.string.toolbar_title);
+        getSupportActionBar().setTitle( R.string.toolbar_title);
         getSupportActionBar().setIcon((int) R.mipmap.ic_launcher_round);
         this.toolbar.setTitleTextColor(-1);
         if (VERSION.SDK_INT >= 21) {
@@ -130,7 +133,7 @@ public class DashboardActivity extends AppCompatActivity {
         this.accountDashboardLayout = (LinearLayout) findViewById(R.id.accountDashboardLayout);
         this.fundTransfarDashboardLayout = (LinearLayout) findViewById(R.id.fundTransfarDashboardLayout);
         this.topUpDashboardLayout = (LinearLayout) findViewById(R.id.topUpDashboardLayout);
-        new PageTransitions(this, this.accountDashboardLayout).pageTransitionLeftToRight();
+       // new PageTransitions(this, this.accountDashboardLayout).pageTransitionLeftToRight();
         new PageTransitions(this, this.fundTransfarDashboardLayout).pageTransitionRightToLeft();
         new PageTransitions(this, this.topUpDashboardLayout).pageTransitionLeftToRight();
         if (VERSION.SDK_INT >= 21) {
@@ -141,6 +144,7 @@ public class DashboardActivity extends AppCompatActivity {
     public void viewActivity(View v) {
         int continueTransfarId = v.getId();
         if (continueTransfarId == R.id.accountDashboardLayout) {
+//            Toast.makeText(DashboardActivity.this,"dub",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, AccountInfoActivity.class));
         } else if (continueTransfarId == R.id.fundTransfarDashboardLayout) {
             startActivity(new Intent(this, GeneralFundTransfarActivity.class));
@@ -150,16 +154,21 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() != R.id.action_logout) {
+  /*      if (item.getItemId() != R.id.action_logout) {
             return super.onOptionsItemSelected(item);
-        }
+        }*/
         if (NetworkAvailability.isNetworkAvailable(this)) {
             this.progress.show();
             String TAG = "Logout";
-            String finalLogoutUrl = (SecurityInfo.BASE_URL + "api/Security/Logout?") + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&terminalIp=" + SecurityInfo.getTerminalIp() + "&sessionId=" + SessionInfo.sessionId;
+
+            String finalLogoutUrl =SecurityInfo.getFinalLogoutUrl(SecurityInfo.getUserEmail(),
+                    SecurityInfo.getUserPassword(), SecurityInfo.getTerminalIp() ,SessionInfo.sessionId);
+
             Log.d("finalLogoutUrl", finalLogoutUrl);
+
             try {
-                Volley.newRequestQueue(this).add(new StringRequest(0, finalLogoutUrl, new LogoutResponseListener(), new C06083()));
+                Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET ,
+                        finalLogoutUrl, new LogoutResponseListener(), new LogoutResponseErrorListener()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -170,7 +179,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.dashboard_bottom_navigation, menu);
         return true;
     }
 

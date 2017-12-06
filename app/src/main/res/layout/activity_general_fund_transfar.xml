@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_motive"
+    android:orientation="vertical">
+
+    <include
+        android:id="@id/toolbar_menu"
+        layout="@layout/toolbar_menu" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@id/coordinatorLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+
+        <LinearLayout
+            android:id="@+id/general_ft_main_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:orientation="vertical" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/generalFtNavigation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorWhite"
+        app:itemTextColor="@color/colorWhite"
+        app:menu="@menu/fund_transfar_bottom_navigation" />
+</LinearLayout>

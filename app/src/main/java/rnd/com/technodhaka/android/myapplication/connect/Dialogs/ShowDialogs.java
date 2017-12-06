@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 
 import rnd.com.technodhaka.android.myapplication.R;
-import rnd.com.technodhaka.android.myapplication.connect.simantobankapp.Activities.LoginRegisterActivity;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.LoginRegisterActivity;
 
 public class ShowDialogs {
     public static void noInternetDialog(Context noInternetContext) {

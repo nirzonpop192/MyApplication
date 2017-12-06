@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.Activities;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -54,7 +54,8 @@ import rnd.com.technodhaka.android.myapplication.connect.MaterialDesign.Elevatio
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
-import rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments.ContactListFragment;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.ContactListFragment;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.FaqFragment;
 
 
 public class LoginPinActivity extends AppCompatActivity implements OnFocusChangeListener, OnKeyListener, TextWatcher {
@@ -123,7 +124,7 @@ public class LoginPinActivity extends AppCompatActivity implements OnFocusChange
                     return true;
                 case R.id.navigation_more:
                     LoginPinActivity.this.currentFragment = new FaqFragment();
-                    LoginPinActivity.this.transaction = LoginPinActivity.this.manager.beginTransaction();
+                    LoginPinActivity.this.transaction = LoginPinActivity.this.manager. beginTransaction();
                     LoginPinActivity.this.transaction.replace(R.id.login_pin_body_layout, LoginPinActivity.this.currentFragment);
                     LoginPinActivity.this.transaction.commit();
                     return true;
@@ -175,7 +176,7 @@ public class LoginPinActivity extends AppCompatActivity implements OnFocusChange
         }
     }
 
-    class PinVerifyJsonResponseListener implements Listener<String> {
+   private class PinVerifyJsonResponseListener implements Listener<String> {
         PinVerifyJsonResponseListener() {
         }
 
@@ -326,7 +327,7 @@ public class LoginPinActivity extends AppCompatActivity implements OnFocusChange
         this.progress.setMessage("Wait while loading...");
         this.progress.setCancelable(false);
         String TAG = "PinVerify";
-        String pinVerifyUrl = SecurityInfo.BASE_URL + "api/Security/Login?";
+        String pinVerifyUrl = SecurityInfo.IB_URL + "api/Security/Login?";
         String terminalIp = SecurityInfo.getTerminalIp();
         String browserInfo = SecurityInfo.getBrowserInfo();
         String finalPinVerifyUrl = pinVerifyUrl + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&pin=" + this.pinText + "&terminalIp=" + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + SecurityInfo.getRemarks();

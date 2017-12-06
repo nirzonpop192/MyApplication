@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_motive"
+    android:background="@drawable/background_motive_dialog_big_1"
     android:orientation="vertical">
 
     <include
@@ -35,38 +35,79 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/accountDashboardLayout"
                         android:layout_width="fill_parent"
-                        android:layout_height="110.0dip"
-                        android:layout_margin="5.0dip"
-                        android:background="@drawable/fixed_ripple_effect"
-                        android:clickable="true"
-                        android:onClick="viewActivity"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/accountDashboardButton"
-                            android:layout_width="0.0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="2.0"
-                            android:padding="20.0dip"
-                            app:srcCompat="@drawable/d1" />
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:id="@+id/accountDashboardLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="110.0dip"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/acc_sum_ripple_effect"
+                            android:clickable="true"
+                            android:onClick="viewActivity"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="0.0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="3.0"
-                            android:gravity="center_vertical"
-                            android:text="@string/acc_info"
-                            android:textColor="@color/colorTextPrimary"
-                            android:textSize="22.0sp"
-                            android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/accountDashboardButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="2.0"
+                                android:padding="20.0dip"
+                                app:srcCompat="@drawable/d1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="3.0"
+                                android:gravity="center_horizontal"
+                                android:text="@string/acc_info"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="19.0sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/fundTransfarDashboardLayout"
+                            android:layout_weight="1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="110.0dip"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/fund_trns_ripple_effect"
+                            android:clickable="true"
+
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/fundTransfarDashboardButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="2.0"
+                                android:padding="20.0dip"
+                                app:srcCompat="@drawable/d3" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="3.0"
+                                android:gravity="center_horizontal"
+                                android:text="@string/trans_fund"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="19.0sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
+<!--
                     <LinearLayout
-                        android:id="@+id/fundTransfarDashboardLayout"
+
                         android:layout_width="fill_parent"
                         android:layout_height="110.0dip"
                         android:layout_margin="5.0dip"
@@ -76,14 +117,14 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/fundTransfarDashboardButton"
+
                             android:layout_width="0.0dip"
                             android:layout_height="fill_parent"
                             android:layout_gravity="center"
                             android:layout_weight="2.0"
                             android:gravity="center_vertical"
                             android:padding="15.0dip"
-                            app:srcCompat="@drawable/d3" />
+                        />
 
                         <TextView
                             android:layout_width="0.0dip"
@@ -95,7 +136,7 @@
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="22.0sp"
                             android:textStyle="bold" />
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:id="@+id/topUpDashboardLayout"

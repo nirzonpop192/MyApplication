@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.simantobankapp.Activities;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -41,7 +41,7 @@ import rnd.com.technodhaka.android.myapplication.connect.MaterialDesign.Elevatio
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
-import rnd.com.technodhaka.android.myapplication.connect.simantobankapp.LoginFragments.LoginRegisterFragment;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.LoginRegisterFragment;
 
 
 public class LoginRegisterActivity extends AppCompatActivity {
@@ -219,7 +219,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 }
             }
             String TAG = "FirstLogin";
-            String finalUrl = (SecurityInfo.BASE_URL + "Api/Security/FirstLogin?")
+            String finalUrl = (SecurityInfo.IB_URL + "Api/Security/FirstLogin?")
                     + "email=" + userEmail + "&password=" + userPass + "&terminalIp="
                     + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + this.remarks;
             Log.d("finalUrl", finalUrl);
