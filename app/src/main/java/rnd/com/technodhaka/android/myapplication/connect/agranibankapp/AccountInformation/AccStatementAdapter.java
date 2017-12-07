@@ -71,7 +71,7 @@ public class AccStatementAdapter extends BaseAdapter {
             holder = (AccountHolder) vi.getTag();
             vi = convertView;
         }
-        Log.d("HolderStatement", " hTdate " + ((AccStatement) this.accountStatementList.get(position)).getTransactiondate() + " deposit " + ((AccStatement) this.accountStatementList.get(position)).getDeposit() + " balance " + ((AccStatement) this.accountStatementList.get(position)).getBalance() + " withdrawal " + ((AccStatement) this.accountStatementList.get(position)).getWithdrawal());
+        Log.d("HolderStatement", " hTdate " + ((AccStatement) this.accountStatementList.get(position)).getTransactiondate() + " deposit " + ((AccStatement) this.accountStatementList.get(position)).getDeposit() + " mBalance " + ((AccStatement) this.accountStatementList.get(position)).getBalance() + " withdrawal " + ((AccStatement) this.accountStatementList.get(position)).getWithdrawal());
         holder.transactionDate.setText(((AccStatement) this.accountStatementList.get(position)).getTransactiondate());
         holder.particular.setText(((AccStatement) this.accountStatementList.get(position)).getParticular());
         holder.deposit.setText(((AccStatement) this.accountStatementList.get(position)).getDeposit());

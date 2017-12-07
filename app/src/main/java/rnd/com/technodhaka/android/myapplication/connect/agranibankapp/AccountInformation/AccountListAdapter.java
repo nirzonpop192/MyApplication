@@ -72,11 +72,11 @@ public class AccountListAdapter extends BaseAdapter {
             holder = (AccountHolder) rowView.getTag();
             rowView = convertView;
         }
-        holder.accNo.setText(((AccountInfo) this.accountList.get(position)).getAccountNo());
-        holder.balance.setText(((AccountInfo) this.accountList.get(position)).getBalance());
-        holder.currency.setText(((AccountInfo) this.accountList.get(position)).getCurrency());
-        holder.accName.setText(((AccountInfo) this.accountList.get(position)).getAccountName());
-        holder.accType.setText(((AccountInfo) this.accountList.get(position)).getAccountType());
+        holder.accNo.setText((this.accountList.get(position)).getAccountNo());
+        holder.balance.setText((this.accountList.get(position)).getBalance());
+        holder.currency.setText((this.accountList.get(position)).getCurrency());
+        holder.accName.setText((this.accountList.get(position)).getAccountName());
+        holder.accType.setText((this.accountList.get(position)).getAccountType());
 
         return rowView;
     }

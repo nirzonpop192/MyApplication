@@ -28,6 +28,7 @@ import rnd.com.technodhaka.android.myapplication.connect.Connectivity.NetworkAva
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.DevController;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -170,7 +171,11 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.progress.setCancelable(false);
                 String TAG = "PinVerify";
                 str_email = edtEmail.getText().toString();
-                String emailLoginUrl = SecurityInfo.IB_URL + "index.php?email=" + str_email;
+                String emailLoginUrl = "";
+                if (DevController.devMode)
+                    emailLoginUrl = SecurityInfo.IB_URL + "index.php?email=" + "abdur.rahim@shimantobank.com";
+                else
+                    emailLoginUrl = SecurityInfo.IB_URL + "index.php?email=" + str_email;
 //        String terminalIp = SecurityInfo.getTerminalIp();
 //        String browserInfo = SecurityInfo.getBrowserInfo();
                 String finalLoginEmailId = emailLoginUrl;

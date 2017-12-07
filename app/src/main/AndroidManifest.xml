@@ -22,24 +22,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
-            <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".connect.agranibankapp.Activities.SplashActivity"
+            android:theme="@style/noAnimTheme"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        -->
-        <activity
-            android:name=".connect.agranibankapp.Activities.SplashActivity"
-            android:theme="@style/noAnimTheme"
-            android:windowSoftInputMode="adjustPan">
-        <!--    <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name=".connect.agranibankapp.Activities.LoginRegisterActivity"
@@ -49,12 +41,12 @@
         <activity
             android:name=".connect.agranibankapp.Activities.DashboardActivity"
             android:windowSoftInputMode="stateHidden">
-
+<!--
                <intent-filter>
                    <action android:name="android.intent.action.MAIN" />
 
                    <category android:name="android.intent.category.LAUNCHER" />
-               </intent-filter>
+               </intent-filter>-->
         </activity>
         <activity android:name=".connect.agranibankapp.Activities.AccountInfoActivity"></activity>
     </application>

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -36,15 +37,17 @@ import java.util.Date;
 import rnd.com.technodhaka.android.myapplication.R;
 import rnd.com.technodhaka.android.myapplication.connect.Animation.PageTransitions;
 import rnd.com.technodhaka.android.myapplication.connect.Connectivity.NetworkAvailability;
+import rnd.com.technodhaka.android.myapplication.connect.Dialogs.ShowDialogs;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.DashboardActivity;
 
 
 public class LoanAccountFragment extends Fragment implements OnClickListener {
 
       FragmentManager accInfoFragManager;
     TextView accName;
-    TextView accNo;
+    Spinner accNo;
     TextView accStatus;
     String accountNo = "";
     private CoordinatorLayout coordinatorLayout;
@@ -86,10 +89,10 @@ public class LoanAccountFragment extends Fragment implements OnClickListener {
                 String emiSize = BigDecimal.valueOf(jSONObject.getDouble("Instalment")).toPlainString();
                 String loanOutstanding = BigDecimal.valueOf(jSONObject.getDouble("OutstandingBalance")).toPlainString().replace("-", "");
                 if (jSONObject.getString("StatementAllowed").equals("Y")) {
-                    LoanAccountFragment.this.viewStatementLnButton.setVisibility(0);
+                    LoanAccountFragment.this.viewStatementLnButton.setVisibility(View.VISIBLE);
                 }
                 LoanAccountFragment.this.userName.setText(acName);
-                LoanAccountFragment.this.accNo.setText(accountNumber);
+//                LoanAccountFragment.this.spAccNo.setText(accountNumber);
                 LoanAccountFragment.this.accStatus.setText(status);
                 LoanAccountFragment.this.accName.setText(acName);
                 LoanAccountFragment.this.remainingInstalmentTv.setText(remainingInstalment);
@@ -111,7 +114,7 @@ public class LoanAccountFragment extends Fragment implements OnClickListener {
         public void onErrorResponse(VolleyError error) {
             try {
                 LoanAccountFragment.this.progress.dismiss();
-                Log.d("accountInfoDetails_Volley", "onErrorResponse: " + error);
+//                Log.fromDateSetListener("accountInfoDetails_Volley", "onErrorResponse: " + error);
                 LoanAccountFragment.this.netExceptionDialog(VolleyErrorHelper.getMessage(error, LoanAccountFragment.this.getActivity()), "Failed!", "Back", "Try Again");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -124,21 +127,21 @@ public class LoanAccountFragment extends Fragment implements OnClickListener {
         if (bundle != null) {
             this.accountNo = bundle.getString("AccountNo");
         }
-        this.rootView = inflater.inflate(R.layout.fragment_loan_account, container, false);
-        this.coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
-        this.userName = (TextView) this.rootView.findViewById(R.id.userName);
-        this.accNo = (TextView) this.rootView.findViewById(R.id.accNo);
-        this.accStatus = (TextView) this.rootView.findViewById(R.id.accStatus);
-        this.accName = (TextView) this.rootView.findViewById(R.id.accName);
-        this.emiDateTv = (TextView) this.rootView.findViewById(R.id.emiDate);
-        this.totalEmiTv = (TextView) this.rootView.findViewById(R.id.totalEmiTv);
-        this.emiSizeTv = (TextView) this.rootView.findViewById(R.id.emiSizeTv);
-        this.remainingInstalmentTv = (TextView) this.rootView.findViewById(R.id.remainingInstalmentTv);
-        this.loanOutstandingTv = (TextView) this.rootView.findViewById(R.id.loanOutstandingTv);
+        rootView = inflater.inflate(R.layout.fragment_loan_account, container, false);
+        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
+        userName = (TextView) this.rootView.findViewById(R.id.userName);
+        accNo = (Spinner) this.rootView.findViewById(R.id.spAccNumber);
+        accStatus = (TextView) this.rootView.findViewById(R.id.accStatus);
+        accName = (TextView) this.rootView.findViewById(R.id.accName);
+        emiDateTv = (TextView) this.rootView.findViewById(R.id.emiDate);
+        totalEmiTv = (TextView) this.rootView.findViewById(R.id.totalEmiTv);
+        emiSizeTv = (TextView) this.rootView.findViewById(R.id.emiSizeTv);
+        remainingInstalmentTv = (TextView) this.rootView.findViewById(R.id.remainingInstalmentTv);
+        loanOutstandingTv = (TextView) this.rootView.findViewById(R.id.loanOutstandingTv);
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
-        getAccountDetails();
+       // getAccountDetails();
         this.viewStatementLnButton = (Button) this.rootView.findViewById(R.id.viewStatementLnButton);
-        this.viewStatementLnButton.setOnClickListener(this);
+//        this.viewStatementLnButton.setOnClickListener(this);
         return this.rootView;
     }
 
@@ -150,7 +153,7 @@ public class LoanAccountFragment extends Fragment implements OnClickListener {
         String terminalIp = SecurityInfo.getTerminalIp();
         String browserInfo = SecurityInfo.getBrowserInfo();
         String TAG = "accountInfoDetails_Volley";
-        String finalAccountInfoDetailsUrl = ((SecurityInfo.baseUrl + "api/Account/AccountDetails?") + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&accountno=" + this.accountNo + "&terminalIp=" + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + SecurityInfo.getRemarks()).replaceAll(" ", "");
+        String finalAccountInfoDetailsUrl = ((SecurityInfo.IB_URL + "api/Account/AccountDetails?") + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&accountno=" + this.accountNo + "&terminalIp=" + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + SecurityInfo.getRemarks()).replaceAll(" ", "");
         Log.d("finaLoanInfoDetailsUrl", finalAccountInfoDetailsUrl);
         if (NetworkAvailability.isNetworkAvailable(getActivity())) {
             try {
@@ -196,7 +199,7 @@ public class LoanAccountFragment extends Fragment implements OnClickListener {
         cancelDialogButton.setText(cancelBtn);
         dialogTitle.setText(title);
         dialogText.setText(message);
-        dialogText.setTextColor(-12303292);
+        dialogText.setTextColor(getResources().getColor(R.color.colorTextPrimary));
         dialogTitle.setTextColor(SupportMenu.CATEGORY_MASK);
         okDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {

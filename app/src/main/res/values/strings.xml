@@ -53,6 +53,8 @@
     <string name="about">About Us</string>
     <string name="acc_info">Account Summary</string>
     <string name="accountName">Account Name:</string>
+    <string name="fromDate">From Date :</string>
+    <string name="toDate">To Date :</string>
     <string name="accountNo">Account No:</string>
     <string name="accountStatus">Account Status:</string>
     <string name="addBeneficiary">Add Beneficiary</string>

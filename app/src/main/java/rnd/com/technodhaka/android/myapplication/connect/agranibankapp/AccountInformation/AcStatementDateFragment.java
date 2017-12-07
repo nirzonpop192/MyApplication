@@ -27,7 +27,7 @@ public class AcStatementDateFragment extends Fragment implements OnClickListener
 
     }
     /* FragmentManager accInfoFragManager;
-    String accountNo = "";
+    String mAccountNo = "";
     private CoordinatorLayout coordinatorLayout;
     Dialog dialog;
     DisplayMetrics displayMetrics;
@@ -50,7 +50,7 @@ public class AcStatementDateFragment extends Fragment implements OnClickListener
         public void onClick(View v) {
             DatePicker startDate = (DatePicker) AcStatementDateFragment.this.dialog.findViewById(R.id.ac_date_picker);
             int sDay = startDate.getDayOfMonth();
-            Log.d("sDay", String.valueOf(sDay));
+            Log.fromDateSetListener("sDay", String.valueOf(sDay));
             int sMonth = startDate.getMonth();
             int sYear = startDate.getYear();
             AcStatementDateFragment.this.startDay = Calendar.getInstance();
@@ -58,9 +58,9 @@ public class AcStatementDateFragment extends Fragment implements OnClickListener
             AcStatementDateFragment.this.startDay.set(Calendar.MONTH, sMonth);
             AcStatementDateFragment.this.startDay.set(Calendar.YEAR, sYear);
             long difference = AcStatementDateFragment.this.today.getTimeInMillis() - AcStatementDateFragment.this.startDay.getTimeInMillis();
-            Log.d("difference", String.valueOf(difference));
+            Log.fromDateSetListener("difference", String.valueOf(difference));
             long days = difference / 86400000;
-            Log.d("days", String.valueOf(days));
+            Log.fromDateSetListener("days", String.valueOf(days));
             AcStatementDateFragment.this.startDateText = (TextView) AcStatementDateFragment.this.getView().findViewById(R.id.startDateText);
             if (days > 90) {
                 SnackbarUtil.generalMessage(AcStatementDateFragment.this.coordinatorLayout, "Statement of only last 3 months is allowed");
@@ -112,9 +112,9 @@ public class AcStatementDateFragment extends Fragment implements OnClickListener
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
         Bundle bundle = getArguments();
         if (bundle != null) {
-            this.accountNo = bundle.getString("AccountNo");
+            this.mAccountNo = bundle.getString("AccountNo");
         }
-        ((TextView) this.rootView.findViewById(R.id.accountNoTextView)).setText(this.accountNo);
+        ((TextView) this.rootView.findViewById(R.id.accountNoTextView)).setText(this.mAccountNo);
         ((LinearLayout) this.rootView.findViewById(R.id.startDateLayout)).setOnClickListener(this);
         ((LinearLayout) this.rootView.findViewById(R.id.endDateLayout)).setOnClickListener(this);
         ((Button) this.rootView.findViewById(R.id.viewFullStatementButton)).setOnClickListener(this);
@@ -133,7 +133,7 @@ public class AcStatementDateFragment extends Fragment implements OnClickListener
                 this.endDate = this.endDateText.getText().toString();
                 this.fragment = new AccountStatementFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("AccountNo", this.accountNo);
+                bundle.putString("AccountNo", this.mAccountNo);
                 bundle.putString("StartDate", this.startDate);
                 bundle.putString("EndDate", this.endDate);
                 this.fragment.setArguments(bundle);

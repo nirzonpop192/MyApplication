@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -33,34 +34,38 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import rnd.com.technodhaka.android.myapplication.R;
+import rnd.com.technodhaka.android.myapplication.connect.Animation.PageTransitions;
+import rnd.com.technodhaka.android.myapplication.connect.Connectivity.NetworkAvailability;
+import rnd.com.technodhaka.android.myapplication.connect.Dialogs.ShowDialogs;
+import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
+import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.DashboardActivity;
 
 
-public class DepositAccountFragment extends Fragment implements OnClickListener {
-    @Override
-    public void onClick(View view) {
+public class DepositAccountFragment_version1 extends Fragment /*implements OnClickListener*/ {
 
-    }
-    /* String TAG = "DepositAccountFragment";
+    String TAG = "AccountDetailsFragment";
     FragmentManager accInfoFragManager;
     TextView accName;
-    TextView accNo;
-    TextView accOpenDate;
+    Spinner accNo;
+//    TextView accOpenDate;
     TextView accStatus;
     String accountNo = "";
-    TextView amountHold;
-    TextView cashBalance;
+//    TextView amountHold;
+//    TextView cashBalance;
     private CoordinatorLayout coordinatorLayout;
     Fragment detailsFragment;
     FragmentTransaction fTransaction;
-    TextView netBalance;
+//    TextView netBalance;
     ProgressDialog progress;
     View rootView;
-    TextView unclearedFunds;
+//    TextView unclearedFunds;
     TextView userName;
-    Button viewStatementButton;
+//    Button viewStatementButton;
 
-    class C05991 implements Listener<String> {
-        C05991() {
+    class DipositeResponseListener implements Listener<String> {
+        DipositeResponseListener() {
         }
 
         public void onResponse(String response) {
@@ -69,7 +74,7 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
             Log.d("ResponseDp", response);
             try {
                 Log.d("Region", "Entered");
-                DepositAccountFragment.this.progress.dismiss();
+                DepositAccountFragment_version1.this.progress.dismiss();
                 JSONObject jSONObject = new JSONObject(response);
                 String moduleType = jSONObject.getString("Module");
                 String minBalance = BigDecimal.valueOf(jSONObject.getDouble("MinBalance")).toPlainString();
@@ -85,20 +90,20 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
                 String statementAllowed = jSONObject.getString("StatementAllowed");
                 Log.d("ClearingTk", clearingTK);
                 Log.d("accountname", acName);
-                if (statementAllowed.equals("Y")) {
-                    DepositAccountFragment.this.viewStatementButton.setVisibility(0);
-                }
-                DepositAccountFragment.this.userName.setText(acName);
+//                if (statementAllowed.equals("Y")) {
+//                    DepositAccountFragment_version1.this.viewStatementButton.setVisibility(View.VISIBLE);
+//                }
+                DepositAccountFragment_version1.this.userName.setText(acName);
                 Log.d("Region", "Entered");
                 Log.d("userNamelove", acName);
-                DepositAccountFragment.this.accNo.setText(accountNumber);
-                DepositAccountFragment.this.accStatus.setText(status);
-                DepositAccountFragment.this.accOpenDate.setText(openDate);
-                DepositAccountFragment.this.accName.setText(acName);
-                DepositAccountFragment.this.cashBalance.setText(balanceTK);
-                DepositAccountFragment.this.amountHold.setText(amountHoldBlockedAmt);
-                DepositAccountFragment.this.netBalance.setText(netAvailableDrawableAmt);
-                DepositAccountFragment.this.unclearedFunds.setText(clearingTK);
+//                AccountDetailsFragment.this.spAccNo.setText(accountNumber);
+                DepositAccountFragment_version1.this.accStatus.setText(status);
+//                DepositAccountFragment_version1.this.accOpenDate.setText(openDate);
+                DepositAccountFragment_version1.this.accName.setText(acName);
+//                DepositAccountFragment_version1.this.cashBalance.setText(balanceTK);
+//                DepositAccountFragment_version1.this.amountHold.setText(amountHoldBlockedAmt);
+//                DepositAccountFragment_version1.this.netBalance.setText(netAvailableDrawableAmt);
+//                DepositAccountFragment_version1.this.unclearedFunds.setText(clearingTK);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -111,9 +116,9 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
 
         public void onErrorResponse(VolleyError error) {
             try {
-                DepositAccountFragment.this.progress.dismiss();
-                Log.d("accountInfoDetails_Volley", "onErrorResponse: " + error);
-                DepositAccountFragment.this.netExceptionDialog(VolleyErrorHelper.getMessage(error, DepositAccountFragment.this.getActivity()), "Failed!", "Back", "Try Again");
+                DepositAccountFragment_version1.this.progress.dismiss();
+
+                DepositAccountFragment_version1.this.netExceptionDialog(VolleyErrorHelper.getMessage(error, DepositAccountFragment_version1.this.getActivity()), "Failed!", "Back", "Try Again");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -125,21 +130,21 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
         if (bundle != null) {
             this.accountNo = bundle.getString("AccountNo");
         }
-        this.rootView = inflater.inflate(R.layout.fragment_deposit_account, container, false);
-        this.coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
-        this.userName = (TextView) this.rootView.findViewById(R.id.userName);
-        this.accNo = (TextView) this.rootView.findViewById(R.id.accNo);
-        this.accStatus = (TextView) this.rootView.findViewById(R.id.accStatus);
-        this.accOpenDate = (TextView) this.rootView.findViewById(R.id.accOpenDate);
-        this.accName = (TextView) this.rootView.findViewById(R.id.accName);
-        this.cashBalance = (TextView) this.rootView.findViewById(R.id.cashBalance);
-        this.amountHold = (TextView) this.rootView.findViewById(R.id.amountOnHoldTv);
-        this.unclearedFunds = (TextView) this.rootView.findViewById(R.id.unclearedFundTv);
-        this.netBalance = (TextView) this.rootView.findViewById(R.id.netBalanceTv);
+        rootView = inflater.inflate(R.layout.fragment_deposit_account, container, false);
+        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
+        userName = (TextView) this.rootView.findViewById(R.id.userName);
+        accNo = (Spinner) this.rootView.findViewById(R.id.spAccNumber);
+        accStatus = (TextView) this.rootView.findViewById(R.id.accStatus);
+//        accOpenDate = (TextView) this.rootView.findViewById(R.id.accOpenDate);
+        accName = (TextView) this.rootView.findViewById(R.id.accName);
+//        cashBalance = (TextView) this.rootView.findViewById(R.id.cashBalance);
+//        amountHold = (TextView) this.rootView.findViewById(R.id.amountOnHoldTv);
+//        unclearedFunds = (TextView) this.rootView.findViewById(R.id.unclearedFundTv);
+//        netBalance = (TextView) this.rootView.findViewById(R.id.netBalanceTv);
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
-        getAccountDetails();
-        this.viewStatementButton = (Button) this.rootView.findViewById(R.id.viewStatementButton);
-        this.viewStatementButton.setOnClickListener(this);
+//        getAccountDetails();
+//        this.viewStatementButton = (Button) this.rootView.findViewById(R.id.viewStatementButton);
+//        this.viewStatementButton.setOnClickListener(this);
         return this.rootView;
     }
 
@@ -151,14 +156,14 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
         String terminalIp = SecurityInfo.getTerminalIp();
         String browserInfo = SecurityInfo.getBrowserInfo();
         String TAG = "accountInfoDetails_Volley";
-        String finalAccountInfoDetailsUrlTreamed = ((SecurityInfo.baseUrl + "api/Account/AccountInfoDetails?") + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&accountno=" + this.accountNo + "&terminalIp=" + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + SecurityInfo.getRemarks()).replaceAll(" ", "");
+        String finalAccountInfoDetailsUrlTreamed = ((SecurityInfo.CBI_URL + "api/Account/AccountInfoDetails?") + "email=" + SecurityInfo.getUserEmail() + "&password=" + SecurityInfo.getUserPassword() + "&accountno=" + this.accountNo + "&terminalIp=" + terminalIp + "&browserInfo=" + browserInfo + "&remarks=" + SecurityInfo.getRemarks()).replaceAll(" ", "");
         Log.d("InfoDetailsUrlTreamed", finalAccountInfoDetailsUrlTreamed);
-        Log.d("accountNo", this.accountNo);
+        Log.d("mAccountNo", this.accountNo);
         if (NetworkAvailability.isNetworkAvailable(getActivity())) {
             try {
                 this.progress.show();
                 RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                StringRequest strReq = new StringRequest(1, finalAccountInfoDetailsUrlTreamed, new C05991(), new C06002());
+                StringRequest strReq = new StringRequest(1, finalAccountInfoDetailsUrlTreamed, new DipositeResponseListener(), new C06002());
                 strReq.setRetryPolicy(new DefaultRetryPolicy(40000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 mRequestQueue.add(strReq);
                 return;
@@ -170,19 +175,19 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
         ShowDialogs.noInternetDialog(getActivity());
     }
 
-    public void onClick(View v) {
-        if (v.getId() == R.id.viewStatementButton) {
-            this.detailsFragment = new AcStatementDateFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("AccountNo", this.accountNo);
-            this.detailsFragment.setArguments(bundle);
-            this.accInfoFragManager = getFragmentManager();
-            this.fTransaction = this.accInfoFragManager.beginTransaction();
-            this.fTransaction.replace(R.id.activity_account_info_layer, this.detailsFragment);
-            this.fTransaction.addToBackStack("AcStatementDateFragment");
-            this.fTransaction.commit();
-        }
-    }
+//    public void onClick(View v) {
+//        if (v.getId() == R.id.viewStatementButton) {
+//            this.detailsFragment = new AcStatementDateFragment();
+//            Bundle bundle = new Bundle();
+//            bundle.putString("AccountNo", this.accountNo);
+//            this.detailsFragment.setArguments(bundle);
+//            this.accInfoFragManager = getFragmentManager();
+//            this.fTransaction = this.accInfoFragManager.beginTransaction();
+//            this.fTransaction.replace(R.id.activity_account_info_layer, this.detailsFragment);
+//            this.fTransaction.addToBackStack("AcStatementDateFragment");
+//            this.fTransaction.commit();
+//        }
+//    }
 
     private void netExceptionDialog(String message, String title, String cancelBtn, String okBtn) {
         final Dialog netErrorDialog = new Dialog(getActivity());
@@ -198,20 +203,20 @@ public class DepositAccountFragment extends Fragment implements OnClickListener 
         cancelDialogButton.setText(cancelBtn);
         dialogTitle.setText(title);
         dialogText.setText(message);
-        dialogText.setTextColor(-12303292);
+        dialogText.setTextColor(getResources().getColor(R.color.colorTextPrimary));
         dialogTitle.setTextColor(SupportMenu.CATEGORY_MASK);
         okDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                DepositAccountFragment.this.getAccountDetails();
+                DepositAccountFragment_version1.this.getAccountDetails();
                 netErrorDialog.dismiss();
             }
         });
         cancelDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                DepositAccountFragment.this.startActivity(new Intent(DepositAccountFragment.this.getActivity(), DashboardActivity.class));
+                DepositAccountFragment_version1.this.startActivity(new Intent(DepositAccountFragment_version1.this.getActivity(), DashboardActivity.class));
                 netErrorDialog.dismiss();
             }
         });
         netErrorDialog.show();
-    }*/
+    }
 }

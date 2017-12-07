@@ -44,31 +44,35 @@ import rnd.com.technodhaka.android.myapplication.connect.Utility.AccInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountDetails.AccountDetailsFragment;
 import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.DashboardActivity;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.DevController;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.View.SpinnerHelper;
 
 
 public class AccountListFragment extends Fragment {
     FragmentManager accInfoFragManager;
     ArrayList<AccountInfo> accountList;
     //String accountModule;
-    String accountNo;
+    String mAccountNo;
     private AccountListAdapter adapter;
-    String balance;
+    String mBalance;
     private CoordinatorLayout coordinatorLayout;
-    String currency;
-    String accountName;
-    String accountType;
+    String mCurrency;
+    String mAccountName;
+    String mAccountType;
     //String description;
     Fragment detailsFragment;
     FragmentTransaction fTransaction;
     FrameLayout frameLayout;
     private ListView listView;
+    private ArrayList<SpinnerHelper> mList;
     String module;
     ProgressDialog progress;
     View rootView;
     //String status;
     private Bundle bundle;
-    private boolean devMode = true;
+
 
     class AccItemClickListener implements OnItemClickListener {
         AccItemClickListener() {
@@ -80,22 +84,23 @@ public class AccountListFragment extends Fragment {
             String moduleText = moduleTextView.getText().toString();
             Log.d("listAccNo", listAccNo);
             Log.d("moduleText", moduleText);
-           /* if (moduleText.equals("DP")) {
-                AccountListFragment.this.detailsFragment = new DepositAccountFragment();
+//            if (moduleText.equals("DP")) {
+            AccountListFragment.this.detailsFragment = new AccountDetailsFragment();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("AccountNo", listAccNo);
-                bundle.putString("Module", moduleText);
+            Bundle bundle = new Bundle();
+            bundle.putString("AccountNo", listAccNo);
+            bundle.putString("Module", moduleText);
+            bundle.putParcelableArrayList("DIM_ke", mList);
 
-                AccountListFragment.this.detailsFragment.setArguments(bundle);
-                AccountListFragment.this.accInfoFragManager = AccountListFragment.this.getFragmentManager();
-                AccountListFragment.this.fTransaction = AccountListFragment.this.accInfoFragManager.beginTransaction();
-                AccountListFragment.this.fTransaction.replace(R.id.activity_account_info_layer, AccountListFragment.this.detailsFragment);
-                AccountListFragment.this.fTransaction.addToBackStack("DepositAccountFragment");
-                AccountListFragment.this.fTransaction.commit();
-                return;
-            }*/
-            AccountListFragment.this.detailsFragment = new LoanAccountFragment();
+            detailsFragment.setArguments(bundle);
+            accInfoFragManager = AccountListFragment.this.getFragmentManager();
+            fTransaction = AccountListFragment.this.accInfoFragManager.beginTransaction();
+            fTransaction.replace(R.id.activity_account_info_layer, AccountListFragment.this.detailsFragment);
+            fTransaction.addToBackStack("AccountDetailsFragment");
+            fTransaction.commit();
+//                return;
+//            }
+            /*AccountListFragment.this.detailsFragment = new LoanAccountFragment();
             bundle = new Bundle();
             bundle.putString("AccountNo", listAccNo);
             bundle.putString("Module", moduleText);
@@ -104,7 +109,7 @@ public class AccountListFragment extends Fragment {
             AccountListFragment.this.fTransaction = AccountListFragment.this.accInfoFragManager.beginTransaction();
             AccountListFragment.this.fTransaction.replace(R.id.activity_account_info_layer, AccountListFragment.this.detailsFragment);
             AccountListFragment.this.fTransaction.addToBackStack("LoanAccountFragment");
-            AccountListFragment.this.fTransaction.commit();
+            AccountListFragment.this.fTransaction.commit();*/
         }
     }
 
@@ -117,38 +122,39 @@ public class AccountListFragment extends Fragment {
 
 //            String treamedResp = response.replaceAll("\\\\", "");
 //            String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
-//            Log.d("treamedSesponse", trimedResponse);
+//            Log.fromDateSetListener("treamedSesponse", trimedResponse);
             AccountListFragment.this.progress.dismiss();
             try {
-                Log.d("inTry1", "Entered");
+//                Log.d("inTry1", "Entered");
                 JSONObject jsonObject = new JSONObject(response);
                 JSONObject user = jsonObject.getJSONObject("user");
-                Log.d("inTry2", "Entered");
+//                Log.d("inTry2", "Entered");
 
                 if (!jsonObject.isNull("customer_account")) {
                     JSONArray customerAccounts = jsonObject.getJSONArray("customer_account");
                     int size = customerAccounts.length();
-
+                    mList = new ArrayList<SpinnerHelper>();
                     for (int i = 0; i < size; i++) {
                         JSONObject customerAccount = customerAccounts.getJSONObject(i);
 
 
                         AccountInfo userAccount = new AccountInfo();
-                        AccountListFragment.this.accountNo = customerAccount.getString("accountno");
-                        AccountListFragment.this.balance = customerAccount.getString("Bal_tk");
-                        AccountListFragment.this.currency = customerAccount.getString("curr_code");
-                        AccountListFragment.this.accountName = customerAccount.getString("acname");
-                        AccountListFragment.this.accountType = customerAccount.getString("acc_type");
+                        mAccountNo = customerAccount.getString("accountno");
+                        mBalance = customerAccount.getString("Bal_tk");
+                        mCurrency = customerAccount.getString("curr_code");
+                        mAccountName = customerAccount.getString("acname");
+                        mAccountType = customerAccount.getString("acc_type");
 
-                        Log.d("inTry currency", AccountListFragment.this.currency);
-                        userAccount.accountNo = AccountListFragment.this.accountNo;
-                        userAccount.balance = AccountListFragment.this.balance;
-                        userAccount.currency = AccountListFragment.this.currency;
-                        userAccount.accountName = AccountListFragment.this.accountName;
-                        userAccount.accountType = AccountListFragment.this.accountType;
+                        Log.d("inTry mCurrency", mCurrency);
+                        userAccount.accountNo = mAccountNo;
+                        userAccount.balance = mBalance;
+                        userAccount.currency = mCurrency;
+                        userAccount.accountName = mAccountName;
+                        userAccount.accountType = mAccountType;
 
                         AccountListFragment.this.accountList.add(userAccount);
-
+                        SpinnerHelper spinnerHelper = new SpinnerHelper(i, String.valueOf(i), mAccountNo);
+                        mList.add(spinnerHelper);
                     }
                 }
 
@@ -187,7 +193,7 @@ public class AccountListFragment extends Fragment {
 
         this.listView = (ListView) this.rootView.findViewById(R.id.account_info_list_view);
         ((TextView) this.rootView.findViewById(R.id.accountHolder)).setText(SessionInfo.getUserName());
-//        Log.d("Gname", SessionInfo.getUserName());
+//        Log.fromDateSetListener("Gname", SessionInfo.getUserName());
         this.adapter = new AccountListAdapter(getActivity(), this.accountList);
         this.listView.setAdapter(this.adapter);
         this.listView.setOnItemClickListener(new AccItemClickListener());
@@ -204,7 +210,7 @@ public class AccountListFragment extends Fragment {
         String browserInfo = SecurityInfo.getBrowserInfo();
         String TAG = "AccountList";
         String finalAccountListUrl = "";
-        if (devMode)
+        if (DevController.devMode)
             finalAccountListUrl = SecurityInfo.CBI_URL + "index.php?cus_id=" + "1001000931";
         else
             finalAccountListUrl = SecurityInfo.CBI_URL + "index.php?cus_id=" + SessionInfo.getCustomerID();

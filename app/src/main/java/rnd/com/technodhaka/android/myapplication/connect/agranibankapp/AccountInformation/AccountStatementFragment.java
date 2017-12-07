@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 
 public class AccountStatementFragment extends Fragment {
-   /* String accountNo = "";
+   /* String mAccountNo = "";
     ArrayList<AccStatement> accountStatementList;
     private AccStatementAdapter adapter;
     private CoordinatorLayout coordinatorLayout;
@@ -58,11 +58,11 @@ public class AccountStatementFragment extends Fragment {
         public void onResponse(String response) {
             String treamedResp = response.replaceAll("\\\\", "");
             String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
-            Log.d("treamedSesponse", trimedResponse);
-            Log.d("ResponseInTry", trimedResponse);
+            Log.fromDateSetListener("treamedSesponse", trimedResponse);
+            Log.fromDateSetListener("ResponseInTry", trimedResponse);
             AccountStatementFragment.this.progress.dismiss();
             try {
-                Log.d("inTry1", "Entered");
+                Log.fromDateSetListener("inTry1", "Entered");
                 JSONArray arrayResponse = new JSONArray(trimedResponse);
                 for (int i = 0; i < arrayResponse.length(); i++) {
                     JSONObject obj = arrayResponse.getJSONObject(i);
@@ -71,13 +71,13 @@ public class AccountStatementFragment extends Fragment {
                     String sDeposit = BigDecimal.valueOf(obj.getDouble("Deposit")).toPlainString();
                     String sParticular = obj.getString("Particular");
                     String sWithdrawal = BigDecimal.valueOf(obj.getDouble("Withdrawal")).toPlainString();
-                    Log.d("balanceWithdrawal", sWithdrawal);
-                    Log.d("Ste", " hTdate " + tdate + " deposit " + sDeposit + " balance " + sBalance + " withdrawal " + sWithdrawal);
+                    Log.fromDateSetListener("balanceWithdrawal", sWithdrawal);
+                    Log.fromDateSetListener("Ste", " hTdate " + tdate + " deposit " + sDeposit + " mBalance " + sBalance + " withdrawal " + sWithdrawal);
                     AccStatement userStatement = new AccStatement();
                     userStatement.transactionDate = tdate;
                     userStatement.particular = sParticular;
                     userStatement.deposit = sDeposit;
-                    userStatement.balance = sBalance;
+                    userStatement.mBalance = sBalance;
                     userStatement.withdrawal = sWithdrawal;
                     AccountStatementFragment.this.accountStatementList.add(userStatement);
                 }
@@ -95,7 +95,7 @@ public class AccountStatementFragment extends Fragment {
         public void onErrorResponse(VolleyError error) {
             try {
                 AccountStatementFragment.this.progress.dismiss();
-                Log.d("AccountStatement", "onErrorResponse: " + error);
+                Log.fromDateSetListener("AccountStatement", "onErrorResponse: " + error);
                 SnackbarUtil.netErrorMessage(AccountStatementFragment.this.coordinatorLayout, VolleyErrorHelper.getMessage(error, AccountStatementFragment.this.getActivity()));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,7 +110,7 @@ public class AccountStatementFragment extends Fragment {
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
         Bundle bundle = getArguments();
         if (bundle != null) {
-            this.accountNo = bundle.getString("AccountNo");
+            this.mAccountNo = bundle.getString("AccountNo");
             this.startDate = bundle.getString("StartDate");
             this.endDate = bundle.getString("EndDate");
         }
@@ -118,7 +118,7 @@ public class AccountStatementFragment extends Fragment {
         this.email = SecurityInfo.getUserEmail();
         this.userCode = SecurityInfo.getUserCode();
         TextView dateTextView = (TextView) this.rootView.findViewById(R.id.dateRangeStTextView);
-        ((TextView) this.rootView.findViewById(R.id.accountNoStatementTextView)).setText(this.accountNo);
+        ((TextView) this.rootView.findViewById(R.id.accountNoStatementTextView)).setText(this.mAccountNo);
         dateTextView.setText("From " + this.startDate + " to " + this.endDate);
         this.listView = (ListView) this.rootView.findViewById(R.id.account_statement_list_view);
         this.adapter = new AccStatementAdapter(getActivity(), this.accountStatementList);
@@ -137,8 +137,8 @@ public class AccountStatementFragment extends Fragment {
         this.progress.setMessage("Wait while loading...");
         this.progress.setCancelable(false);
         String TAG = "AccountStatement";
-        String finalAccountStatementUrl = ((SecurityInfo.baseUrl + "api/Account/AccountStatement?") + "userCode=" + this.userCode + "&accountno=" + this.accountNo + "&sdate=" + this.startDate + "&edate=" + this.endDate + "&email=" + this.email + "&password=" + this.password + "&terminalIp=" + SecurityInfo.terminalIp + "&browserInfo=" + SecurityInfo.browserInfo + "&remarks=" + SecurityInfo.remarks).replaceAll(" ", "");
-        Log.d("fAccountStatementUrl", finalAccountStatementUrl);
+        String finalAccountStatementUrl = ((SecurityInfo.baseUrl + "api/Account/AccountStatement?") + "userCode=" + this.userCode + "&accountno=" + this.mAccountNo + "&sdate=" + this.startDate + "&edate=" + this.endDate + "&email=" + this.email + "&password=" + this.password + "&terminalIp=" + SecurityInfo.terminalIp + "&browserInfo=" + SecurityInfo.browserInfo + "&remarks=" + SecurityInfo.remarks).replaceAll(" ", "");
+        Log.fromDateSetListener("fAccountStatementUrl", finalAccountStatementUrl);
         if (NetworkAvailability.isNetworkAvailable(getActivity())) {
             try {
                 this.progress.show();

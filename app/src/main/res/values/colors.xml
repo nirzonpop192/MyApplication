@@ -14,7 +14,7 @@
     <color name="colorTextHint">#99027d39</color>
     <color name="color_login_bg">#C2E3B3</color>
     <color name="colorRed">#e7d70303</color>
- <!--   List Color-->
+    <!--   List Color-->
     <color name="list_row_hover_end_color">#ffebeef0</color>
     <color name="list_row_hover_start_color">#ffebeef0</color>
     <color name="list_row_start_color">#ffffffff</color>
@@ -34,4 +34,11 @@
     <color name="colorTextBlack">#ff3b3c3d</color>
 
     <color name="colorAccListRipple">#ffd9d9d9</color>
+
+    <!-- grayscale -->
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#DBDBDB</color>
+    <color name="gray">#939393</color>
+    <color name="gray_dark">#5F5F5F</color>
+    <color name="input_label_hint">#cdcdcd</color>
 </resources>
