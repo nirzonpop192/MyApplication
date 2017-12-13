@@ -21,34 +21,39 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBsN9wHee615VTR3yfRFqh3uNwZQtYngu8" />
         <activity
             android:name=".connect.agranibankapp.Activities.SplashActivity"
             android:theme="@style/noAnimTheme"
             android:windowSoftInputMode="adjustPan">
+
+        </activity>
+        <activity
+            android:name=".connect.agranibankapp.Activities.LoginRegisterActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".connect.agranibankapp.Activities.LoginActivity" />
+        <activity
+            android:name=".connect.agranibankapp.Activities.DashboardActivity"
+            android:windowSoftInputMode="stateHidden">
+
+            <!--
+               <intent-filter>
+                   <action android:name="android.intent.action.MAIN" />
+
+                   <category android:name="android.intent.category.LAUNCHER" />
+               </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".connect.agranibankapp.Activities.AccountInfoActivity" />
+        <activity android:name=".connect.agranibankapp.Activities.Map.MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".connect.agranibankapp.Activities.LoginRegisterActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".connect.agranibankapp.Activities.LoginActivity"></activity>
-
-        <activity
-            android:name=".connect.agranibankapp.Activities.DashboardActivity"
-            android:windowSoftInputMode="stateHidden">
-<!--
-               <intent-filter>
-                   <action android:name="android.intent.action.MAIN" />
-
-                   <category android:name="android.intent.category.LAUNCHER" />
-               </intent-filter>-->
-        </activity>
-        <activity android:name=".connect.agranibankapp.Activities.AccountInfoActivity"></activity>
     </application>
 
 </manifest>

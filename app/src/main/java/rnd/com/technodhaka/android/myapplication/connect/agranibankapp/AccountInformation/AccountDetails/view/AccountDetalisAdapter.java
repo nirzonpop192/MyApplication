@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rnd.com.technodhaka.android.myapplication.R;
@@ -20,12 +19,12 @@ import rnd.com.technodhaka.android.myapplication.connect.Animation.PageTransitio
  */
 public class AccountDetalisAdapter extends BaseAdapter {
 
-    List<AccountDetailsDataModel> accountList;
+    List<AccountDetailsDatamodel> accountList;
     private Activity activity;
     private LayoutInflater inflater;
     int transitionCount = 1;
 
-    public AccountDetalisAdapter(Activity activity, List<AccountDetailsDataModel> mAccDetailsList) {
+    public AccountDetalisAdapter(Activity activity, List<AccountDetailsDatamodel> mAccDetailsList) {
         this.activity = activity;
         this.accountList = mAccDetailsList;
     }

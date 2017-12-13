@@ -48,12 +48,9 @@ import rnd.com.technodhaka.android.myapplication.connect.Animation.PageTransitio
 import rnd.com.technodhaka.android.myapplication.connect.Connectivity.NetworkAvailability;
 import rnd.com.technodhaka.android.myapplication.connect.Dialogs.ShowDialogs;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
-import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
-import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountDetails.view.AccountDetailsDataModel;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountDetails.view.AccountDetailsDatamodel;
 import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountDetails.view.AccountDetalisAdapter;
-import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountInfo;
-import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountInformation.AccountListAdapter;
 import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.DashboardActivity;
 import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.View.SpinnerHelper;
 import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.View.SpinnerLoader;
@@ -83,7 +80,7 @@ public class AccountDetailsFragment extends Fragment {
     //    TextView unclearedFunds;
     TextView userName;
     TextView tvFromDate, tvToDate;
-    List<AccountDetailsDataModel> mAccDetailsList = new ArrayList<AccountDetailsDataModel>();
+    List<AccountDetailsDatamodel> mAccDetailsList = new ArrayList<AccountDetailsDatamodel>();
     //    Button viewStatementButton;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
     private Calendar calendar = Calendar.getInstance();
@@ -348,7 +345,7 @@ public class AccountDetailsFragment extends Fragment {
                         mCredit = customerAccount.getString("CREDIT");
                         mAmtbal_tk = customerAccount.getString("amtbal_tk");
 
-                        AccountDetailsDataModel userAccount = new AccountDetailsDataModel(mTdate
+                        AccountDetailsDatamodel userAccount = new AccountDetailsDatamodel(mTdate
                                 , mRemark, mDebit, mCredit, mAmtbal_tk);
 
                         mAccDetailsList.add(userAccount);

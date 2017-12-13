@@ -5,6 +5,6 @@
     <dimen name="btn_corner_rad">3dp</dimen>
     <dimen name="acc_list_ripple_rad">3dp</dimen>
     <dimen name="tableRowPadding">3dp</dimen>
- <!--spinner height -->
+    <!--spinner height -->
     <dimen name="spinner_height">30dp</dimen>
 </resources>

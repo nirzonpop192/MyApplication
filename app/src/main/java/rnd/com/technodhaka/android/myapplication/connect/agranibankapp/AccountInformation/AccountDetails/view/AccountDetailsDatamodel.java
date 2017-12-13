@@ -3,14 +3,14 @@ package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.AccountI
 /**
  * Created by TD-Android on 12/7/2017.
  */
-public class AccountDetailsDataModel {
+public class AccountDetailsDatamodel {
     private String tdate;
     private String remark;
     private String debit;
     private String credit;
     private String amtbal_tk;
 
-    public AccountDetailsDataModel(String mTdate, String mRemark, String mDebit, String mCredit, String mAmtbal_tk) {
+    public AccountDetailsDatamodel(String mTdate, String mRemark, String mDebit, String mCredit, String mAmtbal_tk) {
         this.tdate = mTdate;
         this.remark = mRemark;
         this.debit = mDebit;
