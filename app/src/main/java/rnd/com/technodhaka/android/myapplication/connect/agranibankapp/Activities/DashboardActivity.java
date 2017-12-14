@@ -35,6 +35,7 @@ import rnd.com.technodhaka.android.myapplication.connect.MaterialDesign.Elevatio
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.Activities.Map.MapActivity;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -49,14 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
     Toolbar toolbar;
     LinearLayout topUpDashboardLayout;
 
-    class C03264 implements Runnable {
-        C03264() {
-        }
 
-        public void run() {
-            DashboardActivity.this.doubleBackToExitPressedOnce = false;
-        }
-    }
 
     class NavigationItemSelectedListener implements OnNavigationItemSelectedListener {
         NavigationItemSelectedListener() {
@@ -151,6 +145,10 @@ public class DashboardActivity extends AppCompatActivity {
         } else if (continueTransfarId == R.id.topUpDashboardLayout) {
             startActivity(new Intent(this, TopUpActivity.class));
         }
+        else if (continueTransfarId == R.id.mapDashboardLayout) {
+            startActivity(new Intent(this, MapActivity.class));
+        }
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -192,6 +190,13 @@ public class DashboardActivity extends AppCompatActivity {
         }
         this.doubleBackToExitPressedOnce = true;
         SnackbarUtil.generalMessage(this.coordinatorLayout, "Please click again to Log out");
-        new Handler().postDelayed(new C03264(), 2000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DashboardActivity.this.doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
+
+
 }

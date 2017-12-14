@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +12,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -22,16 +27,22 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.HashMap;
+import java.util.List;
 
 import rnd.com.technodhaka.android.myapplication.R;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         , GoogleApiClient.ConnectionCallbacks, LocationListener {
 
+    public static final int ZOOM_LEVEL = 18;
     private GoogleMap mMap;
     private MapView mMapView;
     private GoogleApiClient mGoogleApiClient;
@@ -39,8 +50,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Location mLastLocation;
     private LocationRequest mLocationRequest;
 
-
+    private int PROXIMITY_RADIUS = 100000;
     private UiSettings mUiSettings;
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+
+    double latitude;
+    double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +66,131 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             checkLocationPermission();
         }
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        Button btnRestaurant = (Button) findViewById(R.id.btnRestaurant);
+        btnRestaurant.setOnClickListener(new View.OnClickListener() {
+            String BANK = "bank";
+
+            @Override
+            public void onClick(View v) {
+                Log.d("onClick", "Button is Clicked");
+
+                if (mMap != null){
+                      /*
+                * Google Map is cleared using mMap.clear() so that any pre-deposited markers are deleted
+                * */
+
+                    mMap.clear();
+                /*
+                * Then we are making a URL using getUrl() function.
+                 * It will be used to get information about nearby restaurant on google maps.
+                  * This URL is made according to Google Developer Guide for nearby places
+                  * (https://developers.google.com/places/web-service/search)
+                  * */
+                    String url = getUrl(latitude, longitude, BANK);
+                    Object[] DataTransfer = new Object[2];
+                    DataTransfer[0] = mMap;
+                    DataTransfer[1] = url;
+                    Log.d("onClick", url);
+                    GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+                    getNearbyPlacesData.execute(DataTransfer);
+                    Toast.makeText(MapActivity.this, "Nearby Restaurants", Toast.LENGTH_LONG).show();
+                }else {
+                    // // TODO: 12/13/2017 if gps is not active than open a dialog to trun on the gps
+                }
+
+            }
+        });
+
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
+
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlacesUrl.append("location=" + latitude + "," + longitude);
+        googlePlacesUrl.append("&radius=" + PROXIMITY_RADIUS);
+        googlePlacesUrl.append("&type=" + nearbyPlace);
+        googlePlacesUrl.append("&sensor=true");
+        googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        Log.d("getUrl", googlePlacesUrl.toString());
+        return (googlePlacesUrl.toString());
+    }
+
+    public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
+
+        String googlePlacesData;
+        GoogleMap mMap;
+        String url;
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Log.d("GetNearbyPlacesData", "doInBackground entered");
+                mMap = (GoogleMap) params[0];
+                url = (String) params[1];
+                DownloadUrl downloadUrl = new DownloadUrl();
+                googlePlacesData = downloadUrl.readUrl(url);
+                Log.d("GooglePlacesReadTask", "doInBackground Exit");
+            } catch (Exception e) {
+                Log.d("GooglePlacesReadTask", e.toString());
+            }
+            return googlePlacesData;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("GooglePlacesReadTask", "onPostExecute Entered");
+            List<HashMap<String, String>> nearbyPlacesList = null;
+            DataParser dataParser = new DataParser();
+            nearbyPlacesList = dataParser.parse(result);
+            ShowNearbyPlaces(nearbyPlacesList);
+            Log.d("GooglePlacesReadTask", "onPostExecute Exit");
+        }
+
+        private void ShowNearbyPlaces(List<HashMap<String, String>> nearbyPlacesList) {
+            for (int i = 0; i < nearbyPlacesList.size(); i++) {
+                Log.d("onPostExecute", "Entered into showing locations");
+                MarkerOptions markerOptions = new MarkerOptions();
+                HashMap<String, String> googlePlace = nearbyPlacesList.get(i);
+                double lat = Double.parseDouble(googlePlace.get("lat"));
+                double lng = Double.parseDouble(googlePlace.get("lng"));
+                String placeName = googlePlace.get("place_name");
+                String vicinity = googlePlace.get("vicinity");
+                LatLng latLng = new LatLng(lat, lng);
+                markerOptions.position(latLng);
+                markerOptions.title(placeName + " : " + vicinity);
+                mMap.addMarker(markerOptions);
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                //move map camera
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+            }
+        }
+    }
+
+    /**
+     * GoogleApiAvailability is the Helper class for verifying that the Google Play services
+     * APK is available and up-to-date on android device.
+     *
+     * @return If result is ConnectionResult.SUCCESS then connection was successful otherwise, we will return false.
+     */
+
+    private boolean CheckGooglePlayServices() {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+        if (result != ConnectionResult.SUCCESS) {
+            if (googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(this, result,
+                        0).show();
+            }
+            return false;
+        }
+        return true;
+    }
 
     @TargetApi(Build.VERSION_CODES.M)
     private boolean checkLocationPermission() {
@@ -118,7 +256,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if (mMap != null)
                             mMap.setMyLocationEnabled(true);
                         else
-                            Toast.makeText(this,"To do somting",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "To do somting", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     // If the user has denied your permission request, then at this point you may want to
@@ -131,7 +269,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();                                                   // get new instance
+        /*
+        *  get new instance of mLocation
+        *  */
+        mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(2000);
 
         if (ContextCompat.checkSelfPermission(this,
@@ -156,12 +297,38 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
 
+
+
+        Log.d("onLocationChanged", "entered");
+
+
+
+        //Place current location marker
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Current Position");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        mLocationMarker = mMap.addMarker(markerOptions);
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM_LEVEL));
+        Toast.makeText(MapActivity.this, "Your Current Location", Toast.LENGTH_LONG).show();
+
+        Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f", latitude, longitude));
+
+        //stop location updates
         // To help preserve the device’s battery life, you’ll typically want to use
         // removeLocationUpdates to suspend location updates when your app is no longer
         // visible onscreen//
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            Log.d("onLocationChanged", "Removing Location Updates");
         }
+        Log.d("onLocationChanged", "Exit");
 
     }
 
@@ -169,6 +336,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      * map
      */
     private void mapUiSettingController() {
+
         mUiSettings = mMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(true);
         mUiSettings.setCompassEnabled(true);

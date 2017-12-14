@@ -22,6 +22,8 @@
 
     <color name="colorRipple">#ffa9a9f5</color>
     <color name="colorRippleDb1">#fff9896c</color>
+    <color name="colorMapSold">#FF3C26</color>
+    <color name="colorFundTrnsDummy">#028915</color>
     <color name="colorFundTrnsSold">#0281d7</color>
     <color name="colorFundTrnsRipple">#024e82</color>
     <color name="colorAccSumSold">#fe8802</color>

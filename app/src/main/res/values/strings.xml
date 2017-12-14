@@ -163,6 +163,8 @@
     <string name="unclearedFund">Uncleared Fund</string>
     <string name="name">Name</string>
     <string name="acc_name">Acc Name:</string>
+    <string name="bank_search">Bank Search</string>
+    <string name="map">Map</string>
 
 
 </resources>
