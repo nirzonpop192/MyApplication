@@ -165,6 +165,102 @@
     <string name="acc_name">Acc Name:</string>
     <string name="bank_search">Bank Search</string>
     <string name="map">Map</string>
+<string-array name="branch_name">
+    <item>Shyamoli</item>
+    <item>Gabtoli</item>
+    <item>Mirpur-1</item>
+    <item>West Shewrapara</item>
+    <item>Mirpur- 10</item>
+    <item>BAF Branch</item>
+    <item>ICDDRB Branch</item>
+    <item>Framget</item>
+    <item>New Market Branch</item>
+    <item>Bangla Academy Campus</item>
+    <item>DU Branch</item>
+    <item>North South Rd</item>
+    <item>Mitford Rd</item>
+    <item>Imamganj Branch</item>
+    <item>Press Club</item>
+    <item>Stadium Street</item>
+    <item>Dilkusha Rd</item>
+    <item>Head Office</item>
+    <item>Motijheel</item>
+    <item>Toyenbee Rd</item>
+    <item>Topkhana Rd</item>
+    <item>Central law College</item>
+    <item>VIP Rd</item>
+    <item>Shanti Nagar Rd</item>
+    <item>Selina Parvin Rd</item>
+    <item>Malibag Branch</item>
+   <!-- sdsd-->
+    <item>Section 1</item>
+    <item>Senpara parbata</item>
+    <item>College Building</item>
+    <item>Mohakhali</item>
+    <item>Nabisco Biscuit</item>
 
+    <item>Karwan Bazar</item>
+    <item>Inter Continental Hotal Compound</item>
+    <item>Motalib Plaza</item>
+    <item>Dhamondi-19</item>
+    <item>Hatirpool</item>
+    <item>Mohammadpur</item>
+</string-array>
+    <string-array name="lat">
+        <item>23.774087</item>
+        <item>23.783587</item>
+        <item>23.797629</item>
+        <item>23.791008</item>
+        <item>23.806485</item>
+        <item>23.776898</item>
+        <item>23.760116</item>
+        <item>23.751949</item>
+        <item>23.736741</item>
+        <item>23.730709</item>
+        <item>23.726927</item>
+        <item>23.716764</item>
+        <item>23.714065</item>
+        <item>23.712800</item>
+        <item>23.729331</item>
+        <item>23.727335</item>
+        <item>23.726218</item>
+        <item>23.727269</item>
+        <item>23.728209</item>
+        <item>23.724455</item>
+        <item>23.730260</item>
+        <item>23.735773</item>
+        <item>23.736030</item>
+        <item>23.741104</item>
+        <item>23.746419</item>
+        <item>23.750055</item>
+    </string-array>
+    <string-array name="lon">
+        <item>90.366122</item>
+        <item>90.342734</item>
+        <item>90.353728</item>
+        <item>90.375250</item>
+        <item>90.368493</item>
+        <item>90.398743</item>
+        <item>90.398225</item>
+        <item>90.985871</item>
+        <item>90.384300</item>
+        <item>90.397279</item>
+        <item>90.400743</item>
+        <item>90.398217</item>
+        <item>90.398520</item>
+        <item>90.397139</item>
+        <item>90.407152</item>
+        <item>90.411826</item>
+        <item>90.415708</item>
+        <item>90.418972</item>
+        <item>90.419161</item>
+        <item>90.421552</item>
+        <item>90.411921</item>
+        <item>90.410101</item>
+        <item>90.414219</item>
+        <item>90.411854</item>
+        <item>90.411302</item>
+        <item>90.412701</item>
+    </string-array>
 
 </resources>

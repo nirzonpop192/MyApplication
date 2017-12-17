@@ -10,18 +10,6 @@ import android.view.View.OnClickListener;
 
 public class SnackbarUtil {
 
-    static class C07581 extends Callback {
-        C07581() {
-        }
-
-        public void onDismissed(Snackbar snackbar, int event) {
-            super.onDismissed(snackbar, event);
-        }
-
-        public void onShown(Snackbar snackbar) {
-            super.onShown(snackbar);
-        }
-    }
 
     static class UnknownClassC07593 extends Callback {
         UnknownClassC07593() {
@@ -58,6 +46,20 @@ public class SnackbarUtil {
             }
         }).setActionTextColor(Color.GRAY).setCallback(new C07581()).show();
     }
+
+    static class C07581 extends Callback {
+        C07581() {
+        }
+
+        public void onDismissed(Snackbar snackbar, int event) {
+            super.onDismissed(snackbar, event);
+        }
+
+        public void onShown(Snackbar snackbar) {
+            super.onShown(snackbar);
+        }
+    }
+
 
     public static void showSnakbarTypeFour(View rootView, final Activity activity, String mMessage) {
         Snackbar.make(rootView, (CharSequence) mMessage, -2).setAction((CharSequence) "TryAgain", new OnClickListener() {

@@ -91,14 +91,37 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                   * This URL is made according to Google Developer Guide for nearby places
                   * (https://developers.google.com/places/web-service/search)
                   * */
-                    String url = getUrl(latitude, longitude, BANK);
+                  /*  String url = getUrl(latitude, longitude, BANK);
                     Object[] DataTransfer = new Object[2];
                     DataTransfer[0] = mMap;
                     DataTransfer[1] = url;
                     Log.d("onClick", url);
                     GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                     getNearbyPlacesData.execute(DataTransfer);
-                    Toast.makeText(MapActivity.this, "Nearby Restaurants", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MapActivity.this, "Nearby Bank", Toast.LENGTH_LONG).show();*/
+                    String[] exercises = getResources().getStringArray(R.array.branch_name);
+                    String[] lat_arr = getResources().getStringArray(R.array.lat);
+                    String[] lng_arr = getResources().getStringArray(R.array.lon);
+
+
+
+                    for (int i = 0; i < lat_arr.length; i++) {
+                        Log.d("onPostExecute", "Entered into showing locations");
+                        MarkerOptions markerOptions = new MarkerOptions();
+                       // HashMap<String, String> googlePlace = nearbyPlacesList.get(i);
+                        double lat = Double.parseDouble(lat_arr[i]);
+                        double lng = Double.parseDouble(lng_arr[i]);
+                        String placeName = exercises[i];
+                     //   String vicinity = googlePlace.get("vicinity");
+                        LatLng latLng = new LatLng(lat, lng);
+                        markerOptions.position(latLng);
+                        markerOptions.title("Agrani Bank Limited :"+placeName );
+                        mMap.addMarker(markerOptions);
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        //move map camera
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+                    }
                 }else {
                     // // TODO: 12/13/2017 if gps is not active than open a dialog to trun on the gps
                 }
