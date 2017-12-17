@@ -144,24 +144,24 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/dummirDashboardLayout"
+                            android:id="@+id/topUpDashboardLayout"
                             android:layout_weight="1"
                             android:layout_width="fill_parent"
                             android:layout_height="110.0dip"
                             android:layout_margin="5dp"
                             android:background="@drawable/ripple_effect_dummy"
                             android:clickable="true"
-
+                            android:onClick="viewActivity"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/dummiDashboardButton"
+                                android:id="@+id/topUpButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
                                 android:layout_gravity="center"
                                 android:layout_weight="2.0"
                                 android:padding="20.0dip"
-                                app:srcCompat="@drawable/d3" />
+                                app:srcCompat="@drawable/top_up_icon" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="3.0"
                                 android:gravity="center_horizontal"
-                                android:text="Dummy"
+                                android:text="@string/topup"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="19.0sp"
                                 android:textStyle="bold" />
@@ -177,7 +177,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                   <!-- <LinearLayout
                         android:id="@+id/topUpDashboardLayout"
                         android:layout_width="fill_parent"
                         android:layout_height="110.0dip"
@@ -207,7 +207,7 @@
                             android:textColor="@color/colorTextPrimary"
                             android:textSize="22.0sp"
                             android:textStyle="bold" />
-                    </LinearLayout>
+                    </LinearLayout>-->
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

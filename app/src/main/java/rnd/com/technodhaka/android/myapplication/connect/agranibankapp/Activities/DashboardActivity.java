@@ -70,6 +70,8 @@ public class DashboardActivity extends AppCompatActivity {
                 case R.id.navigation_account_info:
                     DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, AccountInfoActivity.class));
                     return true;
+
+
                 default:
                     return false;
             }

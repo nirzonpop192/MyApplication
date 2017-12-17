@@ -24,6 +24,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBsN9wHee615VTR3yfRFqh3uNwZQtYngu8" />
+
         <activity
             android:name=".connect.agranibankapp.Activities.SplashActivity"
             android:theme="@style/noAnimTheme"
@@ -55,6 +56,7 @@
         <activity android:name=".connect.agranibankapp.Activities.Map.MapActivity">
 
         </activity>
+        <activity android:name=".connect.agranibankapp.Activities.TopUpActivity"></activity>
     </application>
 
 </manifest>
