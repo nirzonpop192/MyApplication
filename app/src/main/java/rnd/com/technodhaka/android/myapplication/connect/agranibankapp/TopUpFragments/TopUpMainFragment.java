@@ -26,35 +26,51 @@ public class TopUpMainFragment extends Fragment implements OnClickListener {
 
         this.rootView = inflater.inflate(R.layout.fragment_top_up_main, container, false);
 
-        this.coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
+        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
 
         LinearLayout topUpStartButtonLayout = (LinearLayout) this.rootView.findViewById(R.id.topUpStartButtonLayout);
         topUpStartButtonLayout.setOnClickListener(this);
 
         LinearLayout topUpBeneciciaryLayout = (LinearLayout) this.rootView.findViewById(R.id.topUpBeneciciaryLayout);
-
         topUpBeneciciaryLayout.setOnClickListener(this);
+
+        LinearLayout topUpBeneciciaryDeleteLayout = (LinearLayout) this.rootView.findViewById(R.id.topUpBeneciciaryDeleteLayout);
+        topUpBeneciciaryDeleteLayout.setOnClickListener(this);
+
         new PageTransitions(getActivity(), topUpStartButtonLayout).pageTransitionBottomToTop();
         new PageTransitions(getActivity(), topUpBeneciciaryLayout).pageTransitionTopToBottom();
+        new PageTransitions(getActivity(), topUpBeneciciaryDeleteLayout).pageTransitionBottomToTop();
         return this.rootView;
     }
 
     public void onClick(View v) {
-        int ftId = v.getId();
-        if (ftId == R.id.topUpStartButtonLayout) {
-            this.currentFragment = new StartTopUpFragment();
-            this.topupFragManager = getFragmentManager();
-            this.transaction = this.topupFragManager.beginTransaction();
-            this.transaction.replace(R.id.top_up_main_layout, this.currentFragment);
-            this.transaction.addToBackStack("StartTopUpFragment");
-            this.transaction.commit();
-        } else if (ftId == R.id.topUpBeneciciaryLayout) {
-            this.currentFragment = new TopUpBeneficiaryFragment();
-            this.topupFragManager = getFragmentManager();
-            this.transaction = this.topupFragManager.beginTransaction();
-            this.transaction.replace(R.id.top_up_main_layout, this.currentFragment);
-            this.transaction.addToBackStack("TopUpBeneficiaryFragment");
-            this.transaction.commit();
+
+        switch (v.getId()){
+            case R.id.topUpStartButtonLayout:
+               currentFragment = new StartTopUpFragment();
+               topupFragManager = getFragmentManager();
+               transaction = this.topupFragManager.beginTransaction();
+               transaction.replace(R.id.top_up_main_layout, this.currentFragment);
+               transaction.addToBackStack("StartTopUpFragment");
+               transaction.commit();
+                break;
+            case  R.id.topUpBeneciciaryLayout:
+                currentFragment = new TopUpBeneficiaryFragment();
+                topupFragManager = getFragmentManager();
+                transaction = this.topupFragManager.beginTransaction();
+                transaction.replace(R.id.top_up_main_layout, this.currentFragment);
+                transaction.addToBackStack("TopUpBeneficiaryFragment");
+                transaction.commit();
+                break;
+            case R.id.topUpBeneciciaryDeleteLayout:
+                currentFragment = new TopUpBeneficiaryFragment();
+                topupFragManager = getFragmentManager();
+                transaction = this.topupFragManager.beginTransaction();
+                transaction.replace(R.id.top_up_main_layout, this.currentFragment);
+                transaction.addToBackStack("TopUpBeneficiaryDeleteFragment");
+                transaction.commit();
+                break;
         }
+
     }
 }

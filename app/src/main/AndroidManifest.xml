@@ -29,7 +29,11 @@
             android:name=".connect.agranibankapp.Activities.SplashActivity"
             android:theme="@style/noAnimTheme"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".connect.agranibankapp.Activities.LoginRegisterActivity"
@@ -46,11 +50,8 @@
                    <category android:name="android.intent.category.LAUNCHER" />
                </intent-filter>
             -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".connect.agranibankapp.Activities.AccountInfoActivity" />
         <activity android:name=".connect.agranibankapp.Activities.Map.MapActivity">

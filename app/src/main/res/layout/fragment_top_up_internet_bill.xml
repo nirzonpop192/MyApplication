@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_motive_dialog_big_1">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:background="@drawable/general_background_white"
+            android:orientation="vertical"
+            android:padding="20.0dip">
+            <Spinner
+                android:id="@+id/addTopUpBeneficiaryMobileOperatorSpinner"
+                style="@style/spinner_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginTop="5.0dip"
+                android:textSize="15.0dip" />
+            <Spinner
+                android:id="@+id/addTopUpBeneficiaryPhoneTypeSpinner"
+                style="@style/spinner_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginTop="5.0dip"
+                android:textSize="15.0dip" />
+            <TextView
+                android:id="@+id/selectedTopUpBeneficiaryMobileOperator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginTop="5.0dip"
+                android:padding="3.0dip"
+                android:textSize="15.0dip"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/addTopUpBeneficiaryName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15.0dip"
+                android:layout_marginTop="5.0dip"
+                android:background="@drawable/general_border_box"
+                android:hint="@string/beneficiaryName"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="5.0dip"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="18.0dip" />
+
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/selectedTopUpBeneficiaryPhoneType"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginTop="1.0dip"
+                android:padding="3.0dip"
+                android:textSize="15.0dip"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/addTopUpBeneficiaryMobileNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15.0dip"
+                android:layout_marginTop="5.0dip"
+                android:background="@drawable/general_border_box"
+                android:hint="@string/mobileNumber"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="5.0dip"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="18.0dip" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/topUpBeneficiaryCancel"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/cancel_button_background"
+                    android:text="@string/btnCancel"
+                    android:textColor="@color/generalButtonTextColor"
+                    android:textSize="20.0sp" />
+
+                <Button
+                    android:id="@+id/topUpBeneficiaryContinue"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/general_button_background"
+                    android:text="@string/btnContinue"
+                    android:textColor="@color/generalButtonTextColor"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -30,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +46,7 @@ import rnd.com.technodhaka.android.myapplication.connect.Utility.SecurityInfo;
 import rnd.com.technodhaka.android.myapplication.connect.Utility.SessionInfo;
 import rnd.com.technodhaka.android.myapplication.connect.VolleyClasses.VolleyErrorHelper;
 
-public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelectedListener, OnClickListener {
+public class TopUpInternetBillFragment extends Fragment implements OnItemSelectedListener, OnClickListener {
 
     ProgressDialog AddTopUpBeneficiary;
     EditText addTopUpBeneficiaryMobileNumber;
@@ -80,25 +79,25 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.topUpBeneficiaryContinue:
-                selectedTopUpBeneficiaryMobileOperator = (TextView) TopUpBeneficiaryFragment.this.getView().findViewById(R.id.selectedTopUpBeneficiaryMobileOperator);
-                selectedTopUpBeneficiaryPhoneType = (TextView) TopUpBeneficiaryFragment.this.getView().findViewById(R.id.selectedTopUpBeneficiaryPhoneType);
-                addTopUpBeneficiaryName = (EditText) TopUpBeneficiaryFragment.this.getView().findViewById(R.id.addTopUpBeneficiaryName);
-                addTopUpBeneficiaryMobileNumber = (EditText) TopUpBeneficiaryFragment.this.getView().findViewById(R.id.addTopUpBeneficiaryMobileNumber);
-                if (TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryMobileOperator == null || TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryMobileOperator.getText().equals("") || TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryPhoneType == null || TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryPhoneType.getText().equals("") || TopUpBeneficiaryFragment.this.addTopUpBeneficiaryName.getText().toString().replaceAll(" ", "").equals(null) || TopUpBeneficiaryFragment.this.addTopUpBeneficiaryName.getText().toString().replaceAll(" ", "").equals("") || TopUpBeneficiaryFragment.this.addTopUpBeneficiaryMobileNumber == null || TopUpBeneficiaryFragment.this.addTopUpBeneficiaryMobileNumber.getText().equals("")) {
-                    Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(), "Please fill the necessary information ", Toast.LENGTH_SHORT).show();
+                selectedTopUpBeneficiaryMobileOperator = (TextView) TopUpInternetBillFragment.this.getView().findViewById(R.id.selectedTopUpBeneficiaryMobileOperator);
+                selectedTopUpBeneficiaryPhoneType = (TextView) TopUpInternetBillFragment.this.getView().findViewById(R.id.selectedTopUpBeneficiaryPhoneType);
+                addTopUpBeneficiaryName = (EditText) TopUpInternetBillFragment.this.getView().findViewById(R.id.addTopUpBeneficiaryName);
+                addTopUpBeneficiaryMobileNumber = (EditText) TopUpInternetBillFragment.this.getView().findViewById(R.id.addTopUpBeneficiaryMobileNumber);
+                if (TopUpInternetBillFragment.this.selectedTopUpBeneficiaryMobileOperator == null || TopUpInternetBillFragment.this.selectedTopUpBeneficiaryMobileOperator.getText().equals("") || TopUpInternetBillFragment.this.selectedTopUpBeneficiaryPhoneType == null || TopUpInternetBillFragment.this.selectedTopUpBeneficiaryPhoneType.getText().equals("") || TopUpInternetBillFragment.this.addTopUpBeneficiaryName.getText().toString().replaceAll(" ", "").equals(null) || TopUpInternetBillFragment.this.addTopUpBeneficiaryName.getText().toString().replaceAll(" ", "").equals("") || TopUpInternetBillFragment.this.addTopUpBeneficiaryMobileNumber == null || TopUpInternetBillFragment.this.addTopUpBeneficiaryMobileNumber.getText().equals("")) {
+                    Toast.makeText(TopUpInternetBillFragment.this.getActivity(), "Please fill the necessary information ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                beneficiaryAccName = TopUpBeneficiaryFragment.this.addTopUpBeneficiaryName.getText().toString();
-                beneficiaryAccName = TopUpBeneficiaryFragment.this.beneficiaryAccName.replaceAll(" ", "@@@");
-                beneMobileNo = TopUpBeneficiaryFragment.this.addTopUpBeneficiaryMobileNumber.getText().toString();
-                beneMobileOperator = TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryMobileOperator.getText().toString();
-                benePhoneType = TopUpBeneficiaryFragment.this.selectedTopUpBeneficiaryPhoneType.getText().toString();
-                beneMobileOperatorId = (String) TopUpBeneficiaryFragment.this.operatorListHashMap.get(TopUpBeneficiaryFragment.this.beneMobileOperator);
-                benePhoneTypeId = (String) TopUpBeneficiaryFragment.this.phoneTypeListHashMap.get(TopUpBeneficiaryFragment.this.benePhoneType);
+                beneficiaryAccName = TopUpInternetBillFragment.this.addTopUpBeneficiaryName.getText().toString();
+                beneficiaryAccName = TopUpInternetBillFragment.this.beneficiaryAccName.replaceAll(" ", "@@@");
+                beneMobileNo = TopUpInternetBillFragment.this.addTopUpBeneficiaryMobileNumber.getText().toString();
+                beneMobileOperator = TopUpInternetBillFragment.this.selectedTopUpBeneficiaryMobileOperator.getText().toString();
+                benePhoneType = TopUpInternetBillFragment.this.selectedTopUpBeneficiaryPhoneType.getText().toString();
+                beneMobileOperatorId = (String) TopUpInternetBillFragment.this.operatorListHashMap.get(TopUpInternetBillFragment.this.beneMobileOperator);
+                benePhoneTypeId = (String) TopUpInternetBillFragment.this.phoneTypeListHashMap.get(TopUpInternetBillFragment.this.benePhoneType);
                 AddTopUpBeneficiary();
                 break;
             case R.id.topUpBeneficiaryCancel:
-                TopUpBeneficiaryFragment.this.topupFragManager.popBackStack();
+                TopUpInternetBillFragment.this.topupFragManager.popBackStack();
                 break;
         }
     }
@@ -113,7 +112,7 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_top_up_beneficiary, container, false);
+        rootView = inflater.inflate(R.layout.fragment_top_up_internet_bill, container, false);
         coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
         topupFragManager = getFragmentManager();
         operatorListHashMap = new HashMap();
@@ -173,10 +172,10 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                                 String OperatorId = obj.getString("OperatorId");
                                 String OperatorName = obj.getString("OperatorName");
                                 String OperatorPrefix = obj.getString("OperatorPrefix");
-                                TopUpBeneficiaryFragment.this.operatorList.add(OperatorName);
-                                TopUpBeneficiaryFragment.this.operatorListHashMap.put(OperatorName, OperatorId);
+                                TopUpInternetBillFragment.this.operatorList.add(OperatorName);
+                                TopUpInternetBillFragment.this.operatorListHashMap.put(OperatorName, OperatorId);
                             }
-                            TopUpBeneficiaryFragment.this.progressLoadMobileOperator.dismiss();
+                            TopUpInternetBillFragment.this.progressLoadMobileOperator.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -185,7 +184,7 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         try {
-                            TopUpBeneficiaryFragment.this.progressLoadMobileOperator.dismiss();
+                            TopUpInternetBillFragment.this.progressLoadMobileOperator.dismiss();
                             Log.d("LoadMobileOperatorList", "onErrorResponse: " + error);
                     //        Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(), VolleyErrorHelper.getMessage(error, TopUpBeneficiaryFragment.this.getActivity()), Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
@@ -232,15 +231,15 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                             String OperatorId=dim.getString("OperatorId");
                             String OperatorName=dim.getString("OperatorName");
                             String OperatorPrefix=dim.getString("OperatorPrefix");
-                            TopUpBeneficiaryFragment.this.pTypeList.add(OperatorName);
-                            TopUpBeneficiaryFragment.this.phoneTypeListHashMap.put(OperatorName, OperatorId);
+                            TopUpInternetBillFragment.this.pTypeList.add(OperatorName);
+                            TopUpInternetBillFragment.this.phoneTypeListHashMap.put(OperatorName, OperatorId);
                             /*for (int i = 0; i < arrayResponse.length(); i++) {
                                 JSONObject obj = arrayResponse.getJSONObject(i);
                                 String ptName = obj.getString("PhoneTypeName");
                                 String pTypeId = obj.getString("PhoneTypeId");
 
                             }*/
-                            TopUpBeneficiaryFragment.this.progressLoadPhoneType.dismiss();
+                            TopUpInternetBillFragment.this.progressLoadPhoneType.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -249,10 +248,10 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         try {
-                            TopUpBeneficiaryFragment.this.progressLoadPhoneType.dismiss();
+                            TopUpInternetBillFragment.this.progressLoadPhoneType.dismiss();
                             Log.d("LoadPhoneTypeList", "onErrorResponse: " + error);
-                            Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(),
-                                    VolleyErrorHelper.getMessage(error, TopUpBeneficiaryFragment.this.getActivity()),
+                            Toast.makeText(TopUpInternetBillFragment.this.getActivity(),
+                                    VolleyErrorHelper.getMessage(error, TopUpInternetBillFragment.this.getActivity()),
                                     Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -288,21 +287,21 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                         response = response.replaceAll("\\\\", "");
                         response = response.substring(1, response.length() - 1);
                         Log.d("add_beneficiary", response);
-                        TopUpBeneficiaryFragment.this.AddTopUpBeneficiary.dismiss();
-                        TopUpBeneficiaryFragment.this.beneficiaryFailedResponse = response.toString();
+                        TopUpInternetBillFragment.this.AddTopUpBeneficiary.dismiss();
+                        TopUpInternetBillFragment.this.beneficiaryFailedResponse = response.toString();
                         if (response.equals("Y")) {
-                            TopUpBeneficiaryFragment.this.beneficiarySuccessDialog();
+                            TopUpInternetBillFragment.this.beneficiarySuccessDialog();
                         } else {
-                            TopUpBeneficiaryFragment.this.beneficiaryFailedDialog(TopUpBeneficiaryFragment.this.beneficiaryFailedResponse);
+                            TopUpInternetBillFragment.this.beneficiaryFailedDialog(TopUpInternetBillFragment.this.beneficiaryFailedResponse);
                         }
                     }
                 }, new ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         try {
-                            TopUpBeneficiaryFragment.this.AddTopUpBeneficiary.dismiss();
+                            TopUpInternetBillFragment.this.AddTopUpBeneficiary.dismiss();
                             Log.d("AddBeneficiary", "onErrorResponse: " + error);
-                            Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(), VolleyErrorHelper.getMessage(error, TopUpBeneficiaryFragment.this.getActivity()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(TopUpInternetBillFragment.this.getActivity(), VolleyErrorHelper.getMessage(error, TopUpInternetBillFragment.this.getActivity()), Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -363,14 +362,14 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
         // dialogTitle.setTextColor(-16711936);
         okDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                TopUpBeneficiaryFragment.this.addTopUpBeneficiaryName.setText("");
-                TopUpBeneficiaryFragment.this.addTopUpBeneficiaryMobileNumber.setText("");
+                TopUpInternetBillFragment.this.addTopUpBeneficiaryName.setText("");
+                TopUpInternetBillFragment.this.addTopUpBeneficiaryMobileNumber.setText("");
                 topupBeneDialog.dismiss();
             }
         });
         cancelDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                TopUpBeneficiaryFragment.this.topupFragManager.popBackStack();
+                TopUpInternetBillFragment.this.topupFragManager.popBackStack();
                 topupBeneDialog.dismiss();
             }
         });
@@ -399,7 +398,7 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
         });
         cancelDialogButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                TopUpBeneficiaryFragment.this.topupFragManager.popBackStack();
+                TopUpInternetBillFragment.this.topupFragManager.popBackStack();
                 topupBeneDialog.dismiss();
             }
         });

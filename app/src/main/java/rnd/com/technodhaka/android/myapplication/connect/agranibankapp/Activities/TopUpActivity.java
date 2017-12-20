@@ -129,44 +129,9 @@ public class TopUpActivity extends AppCompatActivity implements OnBackStackChang
         }
     }
 
-    class TopupMinMaxAmountResponse implements Listener<String> {
-        TopupMinMaxAmountResponse() {
-        }
 
-        public void onResponse(String response) {
-            Log.d("topupMinMax", response);
-            response = response.replaceAll("\\\\", "");
-            response = response.substring(2, response.length() - 2);
-            Log.d("topupMinMaxAmount", response);
-            TopUpActivity.this.progress.dismiss();
-            // Json parsing
-            try {
-                JSONObject limit = new JSONObject(response);
-                TopupInfo.postpaidTopupMax_limit = Double.valueOf(Double.parseDouble(limit.getString("Postpaid_max_limit")));
-                TopupInfo.postpaidTopupMin_limit = Double.valueOf(Double.parseDouble(limit.getString("Postpaid_min_limit")));
-                TopupInfo.prepaidTopupMax_limit = Double.valueOf(Double.parseDouble(limit.getString("Prepaid_max_limit")));
-                TopupInfo.prepaidTopupMin_limit = Double.valueOf(Double.parseDouble(limit.getString("Prepaid_min_limit")));
-                Log.d("TopUpLimit", "preMin" + TopupInfo.prepaidTopupMin_limit + "preMax" + TopupInfo.prepaidTopupMax_limit + "postMIn" + TopupInfo.postpaidTopupMin_limit + "postMax" + TopupInfo.postpaidTopupMax_limit);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
-    class C06415 implements ErrorListener {
-        C06415() {
-        }
 
-        public void onErrorResponse(VolleyError error) {
-            try {
-                TopUpActivity.this.progress.dismiss();
-                Log.d("topupMinMaxAmount", "onErrorResponse: " + error);
-                Toast.makeText(TopUpActivity.this, VolleyErrorHelper.getMessage(error, TopUpActivity.this), Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     class C06426 implements RequestFilter {
         C06426() {
@@ -247,7 +212,40 @@ public class TopUpActivity extends AppCompatActivity implements OnBackStackChang
             this.progress.show();
             try {
                 RequestQueue mRequestQueue = Volley.newRequestQueue(this);
-                StringRequest strReq = new StringRequest(0, finalTopupMinMaxAmountUrl, new TopupMinMaxAmountResponse(), new C06415());
+                StringRequest strReq = new StringRequest(0, finalTopupMinMaxAmountUrl,
+                        new Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("topupMinMax", response);
+                                response = response.replaceAll("\\\\", "");
+                                response = response.substring(2, response.length() - 2);
+                                Log.d("topupMinMaxAmount", response);
+                                TopUpActivity.this.progress.dismiss();
+                                // Json parsing
+                                try {
+                                    JSONObject limit = new JSONObject(response);
+                                    TopupInfo.postpaidTopupMax_limit = Double.valueOf(Double.parseDouble(limit.getString("Postpaid_max_limit")));
+                                    TopupInfo.postpaidTopupMin_limit = Double.valueOf(Double.parseDouble(limit.getString("Postpaid_min_limit")));
+                                    TopupInfo.prepaidTopupMax_limit = Double.valueOf(Double.parseDouble(limit.getString("Prepaid_max_limit")));
+                                    TopupInfo.prepaidTopupMin_limit = Double.valueOf(Double.parseDouble(limit.getString("Prepaid_min_limit")));
+                                    Log.d("TopUpLimit", "preMin" + TopupInfo.prepaidTopupMin_limit + "preMax" + TopupInfo.prepaidTopupMax_limit + "postMIn" + TopupInfo.postpaidTopupMin_limit + "postMax" + TopupInfo.postpaidTopupMax_limit);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                try {
+                                    TopUpActivity.this.progress.dismiss();
+                                    Log.d("topupMinMaxAmount", "onErrorResponse: " + error);
+                                    Toast.makeText(TopUpActivity.this, VolleyErrorHelper.getMessage(error, TopUpActivity.this), Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                 strReq.setRetryPolicy(new DefaultRetryPolicy(40000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 mRequestQueue.add(strReq);
             } catch (Exception e) {

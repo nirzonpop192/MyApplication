@@ -165,7 +165,8 @@
     <string name="acc_name">Acc Name:</string>
     <string name="bank_search">Bank Search</string>
     <string name="map">Map</string>
-<string-array name="branch_name">
+    <string name="delete_beneficiary">Delete Beneficiary</string>
+    <string-array name="branch_name">
     <item>Shyamoli</item>
     <item>Gabtoli</item>
     <item>Mirpur-1</item>
