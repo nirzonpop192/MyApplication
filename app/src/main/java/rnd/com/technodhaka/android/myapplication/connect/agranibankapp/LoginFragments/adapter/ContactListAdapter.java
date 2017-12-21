@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,7 +50,7 @@ public class ContactListAdapter extends BaseAdapter {
             this.inflater = (LayoutInflater) this.activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if (convertView == null) {
-            vi = this.inflater.inflate(R.layout.contact_list, null);
+            vi = this.inflater.inflate(R.layout.list_row_contact, null);
             holder = new AccountHolder();
             holder.name = (TextView) vi.findViewById(R.id.contact_branch_name);
             holder.address = (TextView) vi.findViewById(R.id.contact_address);

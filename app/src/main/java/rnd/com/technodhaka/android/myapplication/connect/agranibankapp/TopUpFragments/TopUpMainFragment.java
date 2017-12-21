@@ -63,7 +63,7 @@ public class TopUpMainFragment extends Fragment implements OnClickListener {
                 transaction.commit();
                 break;
             case R.id.topUpBeneciciaryDeleteLayout:
-                currentFragment = new TopUpBeneficiaryFragment();
+                currentFragment = new TopUpDeleteBeneficiaryFragment();
                 topupFragManager = getFragmentManager();
                 transaction = this.topupFragManager.beginTransaction();
                 transaction.replace(R.id.top_up_main_layout, this.currentFragment);

@@ -50,9 +50,9 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
 
     ProgressDialog AddTopUpBeneficiary;
     EditText addTopUpBeneficiaryMobileNumber;
-    Spinner addTopUpBeneficiaryMobileOperatorSpinner;
+    Spinner sp_MobileOperator;
     EditText addTopUpBeneficiaryName;
-    Spinner addTopUpBeneficiaryPhoneTypeSpinner;
+    Spinner sp_MobileType;
     String beneMobileNo;
     String beneMobileOperator;
     String beneMobileOperatorId;
@@ -74,6 +74,10 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
     TextView selectedTopUpBeneficiaryPhoneType;
     FragmentManager topupFragManager;
     FragmentTransaction transaction;
+    /**
+     * operator Prefix such as 017
+     *                         019     */
+    String operatorPrefix;
 
     @Override
     public void onClick(View view) {
@@ -103,14 +107,6 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
     }
 
 
-
-
-
-
-
-
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_top_up_internet_bill, container, false);
         coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
@@ -118,24 +114,26 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
         operatorListHashMap = new HashMap();
         phoneTypeListHashMap = new HashMap();
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
-        addTopUpBeneficiaryMobileOperatorSpinner =
+        sp_MobileOperator =
                 (Spinner) rootView.findViewById(R.id.addTopUpBeneficiaryMobileOperatorSpinner);
-        addTopUpBeneficiaryMobileOperatorSpinner.setOnItemSelectedListener(this);
-        addTopUpBeneficiaryMobileOperatorSpinner.setPrompt("Select Operator");
+
+        sp_MobileOperator.setOnItemSelectedListener(this);
+        sp_MobileOperator.setPrompt("Select Operator");
         operatorList = new ArrayList();
         operatorList.add("Select Operator:");
         LoadMobileOperator();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, this.operatorList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1
         );
-        this.addTopUpBeneficiaryMobileOperatorSpinner.setAdapter(dataAdapter);
+        this.sp_MobileOperator.setAdapter(dataAdapter);
         LoadPhoneType();
-        this.addTopUpBeneficiaryPhoneTypeSpinner = (Spinner) this.rootView.findViewById(R.id.addTopUpBeneficiaryPhoneTypeSpinner);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setOnItemSelectedListener(this);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setPrompt("Select Phone Type");
+        sp_MobileType = (Spinner) this.rootView.findViewById(R.id.addTopUpBeneficiaryPhoneTypeSpinner);
+
+        sp_MobileType.setOnItemSelectedListener(this);
+        sp_MobileType.setPrompt("Select Phone Type");
         ArrayAdapter<String> phoneTypeAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, this.pTypeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setAdapter(phoneTypeAdapter);
+        sp_MobileType.setAdapter(phoneTypeAdapter);
         Button topUpBeneficiaryCancel = (Button) this.rootView.findViewById(R.id.topUpBeneficiaryCancel);
         ((Button) this.rootView.findViewById(R.id.topUpBeneficiaryContinue)).setOnClickListener(this);
         topUpBeneficiaryCancel.setOnClickListener(this);
@@ -148,7 +146,8 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
         this.progressLoadMobileOperator.setMessage("Wait while loading...");
         this.progressLoadMobileOperator.setCancelable(false);
         String TAG = "LoadMobileOperatorList";
-        String finalLoadMobileOperatorList = SecurityInfo.IB_URL + "index.php?" + "LoadPhoneType";;
+        String finalLoadMobileOperatorList = SecurityInfo.IB_URL + "index.php?" + "LoadPhoneType";
+        ;
         Log.d("finalOperatorUrl", finalLoadMobileOperatorList);
         if (NetworkAvailability.isNetworkAvailable(getActivity())) {
             try {
@@ -159,21 +158,21 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
                     public void onResponse(String response) {
                         Log.d("ResponseTAInTry", response);
                         //String treamedResp = response.replaceAll("\\\\", "");
-                       // String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
-                     //   Log.d("trimedResponse", trimedResponse);
+                        // String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
+                        //   Log.d("trimedResponse", trimedResponse);
                         try {
-                          //  Log.d("inTry1", "Entered");
+
                             JSONObject jsonObject = new JSONObject(response);
 
-                            JSONArray arrayResponse =jsonObject.getJSONArray("Operators");
-                       //     Log.d("inTry2", "Entered");
+                            JSONArray arrayResponse = jsonObject.getJSONArray("Operators");
+
                             for (int i = 0; i < arrayResponse.length(); i++) {
                                 JSONObject obj = arrayResponse.getJSONObject(i);
                                 String OperatorId = obj.getString("OperatorId");
                                 String OperatorName = obj.getString("OperatorName");
                                 String OperatorPrefix = obj.getString("OperatorPrefix");
-                                TopUpInternetBillFragment.this.operatorList.add(OperatorName);
-                                TopUpInternetBillFragment.this.operatorListHashMap.put(OperatorName, OperatorId);
+                                operatorList.add(OperatorName);
+                                operatorListHashMap.put(OperatorName, OperatorId);
                             }
                             TopUpInternetBillFragment.this.progressLoadMobileOperator.dismiss();
                         } catch (JSONException e) {
@@ -186,7 +185,7 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
                         try {
                             TopUpInternetBillFragment.this.progressLoadMobileOperator.dismiss();
                             Log.d("LoadMobileOperatorList", "onErrorResponse: " + error);
-                    //        Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(), VolleyErrorHelper.getMessage(error, TopUpBeneficiaryFragment.this.getActivity()), Toast.LENGTH_LONG).show();
+                            //        Toast.makeText(TopUpBeneficiaryFragment.this.getActivity(), VolleyErrorHelper.getMessage(error, TopUpBeneficiaryFragment.this.getActivity()), Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -221,16 +220,16 @@ public class TopUpInternetBillFragment extends Fragment implements OnItemSelecte
                     @Override
                     public void onResponse(String response) {
                         Log.d("ResponseTAInTry", response);
-                      //  String treamedResp = response.replaceAll("\\\\", "");
+                        //  String treamedResp = response.replaceAll("\\\\", "");
                         //String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
-                     //   Log.d("trimedResponse", trimedResponse);
+                        //   Log.d("trimedResponse", trimedResponse);
                         try {
                             JSONObject arrayResponse = new JSONObject(response);
 
-                          JSONObject dim=   arrayResponse.getJSONObject("operator");
-                            String OperatorId=dim.getString("OperatorId");
-                            String OperatorName=dim.getString("OperatorName");
-                            String OperatorPrefix=dim.getString("OperatorPrefix");
+                            JSONObject dim = arrayResponse.getJSONObject("operator");
+                            String OperatorId = dim.getString("OperatorId");
+                            String OperatorName = dim.getString("OperatorName");
+                            String OperatorPrefix = dim.getString("OperatorPrefix");
                             TopUpInternetBillFragment.this.pTypeList.add(OperatorName);
                             TopUpInternetBillFragment.this.phoneTypeListHashMap.put(OperatorName, OperatorId);
                             /*for (int i = 0; i < arrayResponse.length(); i++) {

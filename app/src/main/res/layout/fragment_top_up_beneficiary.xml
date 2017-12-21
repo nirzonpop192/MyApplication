@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tv_addTopUpBeneficiaryMobileNumber"
+                    android:id="@+id/tv_addTopUpOperatorPrefix"
                     android:gravity="center_vertical"
                     android:text="017"
                     android:textSize="18.0dip"
@@ -87,6 +87,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5.0dip"
                     android:background="@drawable/general_border_box"
                     android:hint="@string/mobileNumber"

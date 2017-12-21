@@ -51,9 +51,17 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
 
     ProgressDialog AddTopUpBeneficiary;
     EditText addTopUpBeneficiaryMobileNumber;
-    Spinner addTopUpBeneficiaryMobileOperatorSpinner;
+    /**
+     * sp_MobileOperator is a spinner user interactive interface to select
+     * user's preference operator such as Gp, Blk, Robi, airTel
+     */
+    Spinner sp_MobileOperator;
     EditText addTopUpBeneficiaryName;
-    Spinner addTopUpBeneficiaryPhoneTypeSpinner;
+    /**
+     * sp_PhoneType is a spinner user interactive interface to select
+     * the type of cell phone such as prepaid, postpaid
+     */
+    Spinner sp_PhoneType;
     String beneMobileNo;
     String beneMobileOperator;
     String beneMobileOperatorId;
@@ -75,6 +83,11 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
     TextView selectedTopUpBeneficiaryPhoneType;
     FragmentManager topupFragManager;
     FragmentTransaction transaction;
+    /**
+     * operator Prefix such as 017
+     *                         019     */
+    List<String> operatorPrefixList;
+    private TextView tv_OperatorPrefix;
 
     @Override
     public void onClick(View view) {
@@ -119,24 +132,33 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
         operatorListHashMap = new HashMap();
         phoneTypeListHashMap = new HashMap();
         new PageTransitions(getActivity(), this.rootView).pageTransitionBottomToTop();
-        addTopUpBeneficiaryMobileOperatorSpinner =
+        sp_MobileOperator =
                 (Spinner) rootView.findViewById(R.id.addTopUpBeneficiaryMobileOperatorSpinner);
-        addTopUpBeneficiaryMobileOperatorSpinner.setOnItemSelectedListener(this);
-        addTopUpBeneficiaryMobileOperatorSpinner.setPrompt("Select Operator");
+        sp_MobileOperator.setOnItemSelectedListener(this);
+        sp_MobileOperator.setPrompt("Select Operator");
         operatorList = new ArrayList();
+        operatorPrefixList = new ArrayList();
         operatorList.add("Select Operator:");
         LoadMobileOperator();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, this.operatorList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1
         );
-        this.addTopUpBeneficiaryMobileOperatorSpinner.setAdapter(dataAdapter);
-        LoadPhoneType();
-        this.addTopUpBeneficiaryPhoneTypeSpinner = (Spinner) this.rootView.findViewById(R.id.addTopUpBeneficiaryPhoneTypeSpinner);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setOnItemSelectedListener(this);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setPrompt("Select Phone Type");
-        ArrayAdapter<String> phoneTypeAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, this.pTypeList);
+        this.sp_MobileOperator.setAdapter(dataAdapter);
+      //  LoadPhoneType();
+        sp_PhoneType = (Spinner) this.rootView.findViewById(R.id.addTopUpBeneficiaryPhoneTypeSpinner);
+        tv_OperatorPrefix = (TextView) this.rootView.findViewById(R.id.tv_addTopUpOperatorPrefix);
+        sp_PhoneType.setOnItemSelectedListener(this);
+        sp_PhoneType.setPrompt("Select Phone Type");
+        pTypeList= new ArrayList<>();
+
+        operatorPrefixList.add("000");
+        pTypeList.clear();
+        pTypeList.add("Prepaid");
+        pTypeList.add("Postpaid");
+
+        ArrayAdapter<String> phoneTypeAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_expandable_list_item_1, pTypeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
-        this.addTopUpBeneficiaryPhoneTypeSpinner.setAdapter(phoneTypeAdapter);
+        this.sp_PhoneType.setAdapter(phoneTypeAdapter);
         Button topUpBeneficiaryCancel = (Button) this.rootView.findViewById(R.id.topUpBeneficiaryCancel);
         ((Button) this.rootView.findViewById(R.id.topUpBeneficiaryContinue)).setOnClickListener(this);
         topUpBeneficiaryCancel.setOnClickListener(this);
@@ -163,18 +185,20 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                        // String trimedResponse = treamedResp.substring(1, treamedResp.length() - 1);
                      //   Log.d("trimedResponse", trimedResponse);
                         try {
-                          //  Log.d("inTry1", "Entered");
+
                             JSONObject jsonObject = new JSONObject(response);
 
                             JSONArray arrayResponse =jsonObject.getJSONArray("Operators");
-                       //     Log.d("inTry2", "Entered");
+
                             for (int i = 0; i < arrayResponse.length(); i++) {
                                 JSONObject obj = arrayResponse.getJSONObject(i);
                                 String OperatorId = obj.getString("OperatorId");
                                 String OperatorName = obj.getString("OperatorName");
                                 String OperatorPrefix = obj.getString("OperatorPrefix");
-                                TopUpBeneficiaryFragment.this.operatorList.add(OperatorName);
-                                TopUpBeneficiaryFragment.this.operatorListHashMap.put(OperatorName, OperatorId);
+
+                                operatorList.add(OperatorName);
+                                operatorListHashMap.put(OperatorName, OperatorId);
+                                operatorPrefixList.add(OperatorPrefix);
                             }
                             TopUpBeneficiaryFragment.this.progressLoadMobileOperator.dismiss();
                         } catch (JSONException e) {
@@ -209,8 +233,8 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
         this.progressLoadPhoneType.setTitle("Loading");
         this.progressLoadPhoneType.setMessage("Wait while loading...");
         this.progressLoadPhoneType.setCancelable(false);
-        this.pTypeList = new ArrayList();
-        this.pTypeList.add("Select Phone Type:");
+        //this.pTypeList = new ArrayList();
+        //this.pTypeList.add("Select Phone Type:");
         String TAG = "LoadPhoneTypeList";
         String finalLoadPhoneTypeList = SecurityInfo.IB_URL + "index.php?" + "LoadPhoneType";
         Log.d("finalLoadPhoneTypeList", finalLoadPhoneTypeList);
@@ -232,8 +256,8 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                             String OperatorId=dim.getString("OperatorId");
                             String OperatorName=dim.getString("OperatorName");
                             String OperatorPrefix=dim.getString("OperatorPrefix");
-                            TopUpBeneficiaryFragment.this.pTypeList.add(OperatorName);
-                            TopUpBeneficiaryFragment.this.phoneTypeListHashMap.put(OperatorName, OperatorId);
+                           // TopUpBeneficiaryFragment.this.pTypeList.add(OperatorName);
+                        //    TopUpBeneficiaryFragment.this.phoneTypeListHashMap.put(OperatorName, OperatorId);
                             /*for (int i = 0; i < arrayResponse.length(); i++) {
                                 JSONObject obj = arrayResponse.getJSONObject(i);
                                 String ptName = obj.getString("PhoneTypeName");
@@ -329,6 +353,7 @@ public class TopUpBeneficiaryFragment extends Fragment implements OnItemSelected
                     return;
                 } else {
                     selectedTopUpBeneficiaryMobileOperator.setText(itemSource);
+                    tv_OperatorPrefix.setText(operatorPrefixList.get(position));
                     return;
                 }
             case R.id.addTopUpBeneficiaryPhoneTypeSpinner:

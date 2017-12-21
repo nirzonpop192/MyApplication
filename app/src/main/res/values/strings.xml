@@ -70,7 +70,7 @@
     <string name="beftnTransfar">BEFTN Transfer</string>
     <string name="beneficiaryAcNumber">Beneficiary Account Number</string>
     <string name="beneficiaryAddress">Beneficiary Address</string>
-    <string name="beneficiaryName">Beneficiary Name</string>
+    <string name="beneficiaryName">Beneficiary Nick Name</string>
     <string name="bill_pay">Bill Payment</string>
     <string name="bottom_sheet_behavior">android.support.design.widget.BottomSheetBehavior</string>
     <string name="branchName">Branch Name:</string>

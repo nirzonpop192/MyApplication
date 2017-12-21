@@ -1,4 +1,4 @@
-package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models;
+package rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.adapter;
 
 public class BankContactInfo {
     public String address;

@@ -34,8 +34,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import rnd.com.technodhaka.android.myapplication.R;
-import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models.BankContactInfo;
-import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.Models.ContactListAdapter;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.adapter.BankContactInfo;
+import rnd.com.technodhaka.android.myapplication.connect.agranibankapp.LoginFragments.adapter.ContactListAdapter;
 
 public class ContactListFragment extends Fragment {
     private static final int REQUEST_PHONE_CALL = 1;
